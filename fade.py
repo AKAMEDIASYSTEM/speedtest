@@ -32,4 +32,5 @@ def loop():
   delay(pause)
 
 # Start the loop:
-run(setup, loop)
+while True:
+  loop()
