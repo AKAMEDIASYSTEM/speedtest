@@ -11,9 +11,9 @@ import time
 #   }
 # gonna use P9_14 and P9_16 and P8_13 OR P8_19 for PWM
 interval = 0.01
-greenPin = 'PWM1A'
-bluePin = 'PWM1B'
-redPin = 'PWM2B'
+greenPin = 'P9_14'
+bluePin = 'P9_16'
+redPin = 'P8_13'
 
 #PWM.start(channel, duty, freq=2000)
 print 'starting pwm channels'
