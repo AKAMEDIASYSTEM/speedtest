@@ -27,6 +27,8 @@ for j in range(100):
 		pwm.start(greenPin, i)
 		# pwm.start(bluePin, 100-i)
 		pwm.start(redPin, 100-i)
+		pwm.start(bluePin, i)
 		time.sleep(interval)
+
 
 	pwm.cleanup()
