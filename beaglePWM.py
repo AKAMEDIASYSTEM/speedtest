@@ -9,6 +9,7 @@ bluePin = 'P9_16'
 redPin = 'P8_13'
 
 #PWM.start(channel, duty, freq=2000)
+print 'starting pwm channels'
 pwm.start(greenPin, 50)
 pwm.start(bluePin,0)
 pwm.start(redPin,0)
