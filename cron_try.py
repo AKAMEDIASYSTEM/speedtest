@@ -71,7 +71,7 @@ print 'starting pwm channels'
     pwm.start(greenPin, 0)
     pwm.start(bluePin,0)
     pwm.start(redPin,0)
-    'done starting pwm channels'
+    print 'done starting pwm channels'
     while True:
         testSpeed()
         time.sleep(interval)
