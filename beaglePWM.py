@@ -28,4 +28,5 @@ for j in range(100):
 		# pwm.set_duty_cycle(bluePin, 100-i)
 		pwm.set_duty_cycle(redPin, 100-i)
 		time.sleep(interval)
-	# pwm.cleanup()
+
+pwm.cleanup()
