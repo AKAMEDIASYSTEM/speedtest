@@ -41,7 +41,7 @@ for j in range(100):
 	
 	for i in range(100):
 		# print i
-		rot = mapVals(i,0,100,5.0,10.0)
+		rot = mapVals(i,0.0,100.0,5.0,10.0)
 		print rot
 		pwm.set_duty_cycle(greenPin, i)
 		pwm.set_duty_cycle(bluePin, rot)
