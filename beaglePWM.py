@@ -32,7 +32,7 @@ for j in range(100):
 	print j
 	print 'starting pwm channels'
 	pwm.start(greenPin, 50, 2000)
-	pwm.start(bluePin, 50, 50) # 50Hz
+	pwm.start(bluePin, 50, 5) # 50Hz
 	pwm.start(redPin, 0, 2000)
 	for i in range(100):
 		# print i
