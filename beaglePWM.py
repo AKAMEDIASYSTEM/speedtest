@@ -29,7 +29,7 @@ for j in range(100):
 	for i in range(100):
 		# print i
 		pwm.set_duty_cycle(greenPin, i)
-		pwm.set_duty_cycle(bluePin, j)
+		pwm.start(bluePin, 100-j, 50.0)
 		pwm.set_duty_cycle(redPin, 100-i)
 		time.sleep(interval)
 
