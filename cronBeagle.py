@@ -22,8 +22,8 @@ servoPin = 'P8_45'
 # NOTE, these might be wrong! There's every possiblilty we want
 # max=95 and min=90 because the duty cycle is inverted??
 
-servoMax = 90.0
-servoMin = 95.0
+servoMax = 10.0
+servoMin = 5.0
 
 # from sparkfun small-servo product comments (I think this is my type of servo)
 # Here is what I found out with this servo.
@@ -55,7 +55,7 @@ def testSpeed():
     ])
     # print line
     values = line.split(',')
-    print 'values is ', values
+    # print 'values is ', values
     pingtime = mapVals(float(values[0]),0,1000,0,160) #changed to 160 deg total rot to be safe
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
@@ -63,7 +63,7 @@ def testSpeed():
     pwm.start(redPin,dl)
     # pwm.start(bluePin, pingtime)
     servo(bluePin, pingtime)
-    print 'pingtime is', pingtime
+    print 'pingtime in servo degrees is', pingtime
     print 'dl is', dl
     # updateDevice(pingtime, dl, ul)
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
