@@ -23,13 +23,13 @@ redPin = 'P8_13'
 for j in range(100):
 	print j
 	print 'starting pwm channels'
-	pwm.start(greenPin, 50.0)
-	pwm.start(bluePin, 50.0, 50.0) # 50Hz
-	pwm.start(redPin, 0.0)
+	pwm.start(greenPin, 50)
+	pwm.start(bluePin, 50, 50) # 50Hz
+	pwm.start(redPin, 0)
 	for i in range(100):
 		# print i
 		pwm.set_duty_cycle(greenPin, i)
-		pwm.start(bluePin, 100-j, 50.0)
+		pwm.set_duty_cycle(bluePin, 100-j)
 		pwm.set_duty_cycle(redPin, 100-i)
 		time.sleep(interval)
 
