@@ -37,7 +37,7 @@ for j in range(100):
 	for i in range(100):
 		# print i
 		pwm.set_duty_cycle(greenPin, i)
-		rot = mapVals(i,0.0,100.0,5.0,10.0)
+		rot = mapVals(i,0.0,100.0,5.0,20.0)
 		print 'rot is',rot
 		pwm.set_duty_cycle(bluePin, rot) # servo ms timing experiment
 		pwm.set_duty_cycle(redPin, 100-i)
