@@ -26,6 +26,7 @@ ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more com
 out = []
 
 def testSpeed():
+    pwm.start(bluePin,50)
     print 'TESTING SPEED'
     p = subprocess.Popen(['speedtest-cli','--simple'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     output, err = p.communicate()
@@ -38,7 +39,7 @@ def testSpeed():
     # print line
     values = line.split(',')
     print 'values is ', values
-    pingtime = mapVals(float(values[0]),0,500,0,100)
+    pingtime = mapVals(float(values[0]),0,1000,0,100)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.start(greenPin,100-dl)
