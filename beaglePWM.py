@@ -29,9 +29,17 @@ for j in range(100):
 	for i in range(100):
 		# print i
 		pwm.set_duty_cycle(greenPin, i)
-		pwm.set_duty_cycle(bluePin, 100-j)
+		pwm.set_duty_cycle(bluePin, mapVals(i,0,100,5,10)) # servo ms timing experiment
 		pwm.set_duty_cycle(redPin, 100-i)
 		time.sleep(interval)
 
 
 pwm.cleanup()
+
+def mapVals(val, inMin, inMax, outMin, outMax):
+    toRet = outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+    if (toRet > outMax):
+        toRet = outMax
+    if (toRet < outMin):
+        toRet = outMin
+    return toRet
