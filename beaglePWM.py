@@ -22,4 +22,3 @@ while True:
 		pwm.start(redPin, 100-i)
 		time.sleep(interval)
 
-pwm.cleanup()
