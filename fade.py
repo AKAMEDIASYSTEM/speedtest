@@ -7,7 +7,7 @@
 # Import PyBBIO library:
 from BBIO import *
 
-LED = PWM1A 
+LED = 'P9_14' 
 brightness = 0  # Global variable to store brightness level
 inc = 1         # How much to increment the brightness by
 pause = 10      # Delay in ms between each step 
