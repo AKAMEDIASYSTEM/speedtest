@@ -34,12 +34,14 @@ for j in range(100):
 	pwm.start(greenPin, 50, 2000)
 	pwm.start(bluePin, 50, 10) # 50Hz
 	pwm.start(redPin, 0, 2000)
+	rot = mapVals(j,0.0,100.0,5.0,20.0)
+	print 'rot is',rot
+	pwm.set_duty_cycle(bluePin, rot) # servo ms timing experiment
+	
 	for i in range(100):
 		# print i
 		pwm.set_duty_cycle(greenPin, i)
-		rot = mapVals(i,0.0,100.0,5.0,20.0)
-		print 'rot is',rot
-		pwm.set_duty_cycle(bluePin, rot) # servo ms timing experiment
+
 		pwm.set_duty_cycle(redPin, 100-i)
 		time.sleep(interval)
 
