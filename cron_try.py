@@ -37,13 +37,13 @@ def testSpeed():
     ])
     # print line
     values = line.split(',')
-    print values
+    print 'values is ', values
     pingtime = mapVals(values[0],0,500,0,100)
     dl = mapVals(values[1],0, dlMax, 0, 100)
     ul = mapVals(values[2],0, ulMax, 0, 100)
-    pwm.set_duty_cycle(greenPin,100-dl)
-    pwm.set_duty_cycle(redPin,dl)
-    pwm.set_duty_cycle(bluePin, pingtime)
+    pwm.start(greenPin,100-dl)
+    pwm.start(redPin,dl)
+    pwm.start(bluePin, pingtime)
     print 'pingtime is ', pingtime
     updateDevice(pingtime, dl, ul):
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
