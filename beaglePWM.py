@@ -24,9 +24,9 @@ for j in range(100):
 	print j
 	for i in range(100):
 		# print i
-		pwm.set_duty_cycle(greenPin, i)
-		# pwm.set_duty_cycle(bluePin, 100-i)
-		pwm.set_duty_cycle(redPin, 100-i)
+		pwm.start(greenPin, i)
+		# pwm.start(bluePin, 100-i)
+		pwm.start(redPin, 100-i)
 		time.sleep(interval)
 
 pwm.cleanup()
