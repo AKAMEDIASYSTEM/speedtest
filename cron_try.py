@@ -45,24 +45,25 @@ def testSpeed():
     pwm.start(redPin,dl)
     pwm.start(bluePin, pingtime)
     print 'pingtime is ', pingtime
-    updateDevice(pingtime, dl, ul):
+    # updateDevice(pingtime, dl, ul)
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-	return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+    return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
 
 def updateDevice(pingtime, dls, uls):
-	# make a mapping from most recent speedtest info
+    ping = mapVals(pingtime, 0, pingMax, 0, 255)
+    dl = mapVals(out, 0, dlMax, 0, 255)
+    # we don't do anything with ul yet
+    pwm.start(redPin, 100-dl)
+    pwm.start(greenPin, dl)
+    # make a mapping from most recent speedtest info
 	# map dl speed to a red-to-green spectrum
 	# map ping time to an angle from 0 to 90 degrees(?)
 	# which is 50 steps on a stepper motor...
 	# map ul speed to a little pulse
-	ping = mapVals(pingtime, 0, pingMax, 0, 255)
-	dl = mapVals(out, 0, dlMax, 0, 255)
-    # we don't do anything with ul yet
-    pwm.start(redPin, 100-dl)
-    pwm.start(greenPin, dl)
+
 
 if __name__ == '__main__':
     #PWM.start(channel, duty, freq=2000)
