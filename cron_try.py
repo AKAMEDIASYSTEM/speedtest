@@ -1,8 +1,8 @@
 import time
 import subprocess
 import re
-import BBIO.GPIO as GPIO
-import BBIO.PWM as pwm
+import Adafruit_BBIO.GPIO as GPIO
+import Adafruit_BBIO.PWM as pwm
 
 # from source on github:
 # PWM_PINS = {

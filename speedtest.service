@@ -1,0 +1,10 @@
+[Unit]
+Description=Start Python Speedtest service
+
+[Service]
+WorkingDirectory=~/speedtest/
+ExecStart=/usr/bin/python cronBeagle.py
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
