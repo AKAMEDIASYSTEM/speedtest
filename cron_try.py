@@ -10,6 +10,7 @@ interval = 30
 pingMax = 300 # in ms
 dlMax = 20 # in Mb/s
 ulMax = 10 # in Mb/s
+out = []
 
 def testSpeed():
     print 'TESTING SPEED'
@@ -23,7 +24,6 @@ def testSpeed():
     ])
     print line
     out = [line] + [l for l in open("recent_test.txt")][0:window_size]
-
     open("recent_test.txt","w").write('\n'.join(out))
 
 def mapVals(val, inMin, inMax, outMin, outMax):
@@ -35,8 +35,8 @@ def updateDevice():
 	# map ping time to an angle from 0 to 90 degrees(?)
 	# which is 50 steps on a stepper motor...
 	# map ul speed to a little pulse
-	ping = mapVals(out[0], 0, pingMax, 0, 255)
-	dl = mapVals(out[1], 0, dlMax, 0, 255)
+	ping = mapVals(out, 0, pingMax, 0, 255)
+	dl = mapVals(out, 0, dlMax, 0, 255)
 
 if __name__ == '__main__':
     while True:
