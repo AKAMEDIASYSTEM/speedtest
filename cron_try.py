@@ -2,6 +2,12 @@ import time
 import subprocess
 import re
 
+# gonna use P9_14 and P9_16 and P8_13 OR P8_19 for PWM
+
+greenPin = 'P9_14'
+bluePin = 'P9_16'
+redPin = 'P8_13'
+
 # Start the scheduler
 # sched = Scheduler()
 # sched.start()
@@ -10,6 +16,7 @@ interval = 30
 pingMax = 300 # in ms
 dlMax = 20 # in Mb/s
 ulMax = 10 # in Mb/s
+out = []
 
 def testSpeed():
     print 'TESTING SPEED'
@@ -23,11 +30,11 @@ def testSpeed():
     ])
     print line
     out = [line] + [l for l in open("recent_test.txt")][0:window_size]
-
     open("recent_test.txt","w").write('\n'.join(out))
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-	return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+	pass
+	# return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
 
 def updateDevice():
 	# make a mapping from most recent speedtest info
@@ -35,8 +42,8 @@ def updateDevice():
 	# map ping time to an angle from 0 to 90 degrees(?)
 	# which is 50 steps on a stepper motor...
 	# map ul speed to a little pulse
-	ping = mapVals(out[0], 0, pingMax, 0, 255)
-	dl = mapVals(out[1], 0, dlMax, 0, 255)
+	ping = mapVals(out, 0, pingMax, 0, 255)
+	dl = mapVals(out, 0, dlMax, 0, 255)
 
 if __name__ == '__main__':
     while True:
