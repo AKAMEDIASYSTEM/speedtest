@@ -3,7 +3,7 @@ import BBIO.PWM as pwm
 import time
 
 # gonna use P9_14 and P9_16 and P8_13 OR P8_19 for PWM
-interval = 1
+interval = 0.3
 greenPin = 'P9_14'
 bluePin = 'P9_16'
 redPin = 'P8_13'
