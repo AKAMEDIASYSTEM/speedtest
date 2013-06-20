@@ -2,6 +2,12 @@ import time
 import subprocess
 import re
 
+# gonna use P9_14 and P9_16 and P8_13 OR P8_19 for PWM
+
+greenPin = 'P9_14'
+bluePin = 'P9_16'
+redPin = 'P8_13'
+
 # Start the scheduler
 # sched = Scheduler()
 # sched.start()
@@ -27,7 +33,8 @@ def testSpeed():
     open("recent_test.txt","w").write('\n'.join(out))
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-	return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+	pass
+	# return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
 
 def updateDevice():
 	# make a mapping from most recent speedtest info
