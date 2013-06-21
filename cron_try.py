@@ -25,15 +25,18 @@ def testSpeed():
     p = subprocess.Popen(['speedtest-cli','--simple'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     output, err = p.communicate()
     data = [d for d in output.split('\n') if d.strip()!='']
-    print data
+    # print data
     line = ','.join([
         re.findall(r'[0-9]*\.[0-9]*',entry)[0] 
         for entry in data
     ])
-    print line
-    out = [line] + [l for l in open("recent_test.txt")][0:window_size]
-    open("recent_test.txt","w").write('\n'.join(out))
-    val = mapVals()
+    # print line
+    values = line.split(',')
+    print values
+    rgbVal = mapVals(values[0],0,500,0,100)
+    print 'rgbVal is ', rgbVal
+    # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
+    # open("recent_test.txt","w").write('\n'.join(out))
 
 def mapVals(val, inMin, inMax, outMin, outMax):
 	return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
