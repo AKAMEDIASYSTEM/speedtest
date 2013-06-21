@@ -4,17 +4,19 @@ import re
 import BBIO.GPIO as GPIO
 import BBIO.PWM as pwm
 
-# gonna use P9_14 and P9_16 and P8_13 OR P8_19 for PWM
-
+# from source on github:
+# PWM_PINS = {
+#     "PWM1A" : {"key":"P9_14"},
+#     "PWM1B" : {"key":"P9_16"},
+#     "PWM2A" : {"key":"P8_45"},
+#     "PWM2B" : {"key":"P8_13"}
+#   }
+interval = 0.01 # in seconds, it turns out!
 greenPin = 'P9_14'
 bluePin = 'P9_16'
 redPin = 'P8_13'
 
-# Start the scheduler
-# sched = Scheduler()
-# sched.start()
 window_size = 29
-interval = 30
 pingMax = 300 # in ms
 dlMax = 20 # in Mb/s
 ulMax = 10 # in Mb/s
@@ -51,6 +53,11 @@ def updateDevice(pingtime, dls, uls):
 	dl = mapVals(out, 0, dlMax, 0, 255)
 
 if __name__ == '__main__':
+    #PWM.start(channel, duty, freq=2000)
+print 'starting pwm channels'
+    pwm.start(greenPin, 0)
+    pwm.start(bluePin,0)
+    pwm.start(redPin,0)
     while True:
         testSpeed()
         updateDevice()
