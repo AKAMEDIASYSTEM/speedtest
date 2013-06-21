@@ -21,4 +21,4 @@ while True:
 		# pwm.start(bluePin, 100-i)
 		pwm.start(redPin, 100-i)
 		time.sleep(interval)
-
+	print 'loop over, i is %s',i
