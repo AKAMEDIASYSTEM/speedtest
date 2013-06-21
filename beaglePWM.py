@@ -15,8 +15,9 @@ pwm.start(bluePin,0)
 pwm.start(redPin,0)
 
 for j in range(100):
+	print j
 	for i in range(100):
-		print i
+		# print i
 		pwm.start(greenPin, i)
 		# pwm.start(bluePin, 100-i)
 		pwm.start(redPin, 100-i)
