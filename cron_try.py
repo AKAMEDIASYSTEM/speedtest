@@ -1,6 +1,8 @@
 import time
 import subprocess
 import re
+import BBIO.GPIO as GPIO
+import BBIO.PWM as pwm
 
 # gonna use P9_14 and P9_16 and P8_13 OR P8_19 for PWM
 
@@ -23,7 +25,7 @@ def testSpeed():
     p = subprocess.Popen(['speedtest-cli','--simple'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     output, err = p.communicate()
     data = [d for d in output.split('\n') if d.strip()!='']
-    # print data
+    print data
     line = ','.join([
         re.findall(r'[0-9]*\.[0-9]*',entry)[0] 
         for entry in data
@@ -31,18 +33,18 @@ def testSpeed():
     print line
     out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     open("recent_test.txt","w").write('\n'.join(out))
+    val = mapVals()
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-	pass
-	# return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+	return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
 
-def updateDevice():
+def updateDevice(pingtime, dls, uls):
 	# make a mapping from most recent speedtest info
 	# map dl speed to a red-to-green spectrum
 	# map ping time to an angle from 0 to 90 degrees(?)
 	# which is 50 steps on a stepper motor...
 	# map ul speed to a little pulse
-	ping = mapVals(out, 0, pingMax, 0, 255)
+	ping = mapVals(pingtime, 0, pingMax, 0, 255)
 	dl = mapVals(out, 0, dlMax, 0, 255)
 
 if __name__ == '__main__':
