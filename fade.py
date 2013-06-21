@@ -5,7 +5,7 @@
 # This example is in the public domain
 
 # Import PyBBIO library:
-from bbio import *
+from BBIO import *
 
 LED = PWM1A 
 brightness = 0  # Global variable to store brightness level
