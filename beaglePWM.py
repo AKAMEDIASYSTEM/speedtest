@@ -3,7 +3,7 @@ import BBIO.PWM as pwm
 import time
 
 # gonna use P9_14 and P9_16 and P8_13 OR P8_19 for PWM
-interval = 0.1
+interval = 0..05
 greenPin = 'P9_14'
 bluePin = 'P9_16'
 redPin = 'P8_13'
@@ -21,4 +21,5 @@ while True:
 		# pwm.start(bluePin, 100-i)
 		pwm.start(redPin, 100-i)
 		time.sleep(interval)
-	print 'loop over, i is %s',i
+	print 'loop over, i is ',i
+	pwm.cleanup()
