@@ -29,4 +29,4 @@ for j in range(100):
 		# pwm.start(bluePin, 100-i)
 		pwm.start(redPin, 100-i)
 		time.sleep(interval)
-pwm.cleanup()
+	pwm.cleanup()
