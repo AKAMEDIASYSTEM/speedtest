@@ -15,19 +15,23 @@ bluePin = 'P9_16'
 redPin = 'P8_13'
 
 #PWM.start(channel, duty, freq=2000)
-print 'starting pwm channels'
-pwm.start(greenPin, 50)
-pwm.start(bluePin,0, 50) # 50Hz
-pwm.start(redPin,0)
+# print 'starting pwm channels'
+# pwm.start(greenPin, 50.0)
+# pwm.start(bluePin, 50.0, 50.0) # 50Hz
+# pwm.start(redPin, 0.0)
 
 for j in range(100):
 	print j
+	print 'starting pwm channels'
+	pwm.start(greenPin, 50.0)
+	pwm.start(bluePin, 50.0, 50.0) # 50Hz
+	pwm.start(redPin, 0.0)
 	for i in range(100):
 		# print i
-		pwm.start(greenPin, i)
-		pwm.start(bluePin, j)
-		pwm.start(redPin, 100-i)
+		pwm.set_duty_cycle(greenPin, i)
+		pwm.set_duty_cycle(bluePin, j)
+		pwm.set_duty_cycle(redPin, 100-i)
 		time.sleep(interval)
 
 
-	pwm.cleanup()
+pwm.cleanup()
