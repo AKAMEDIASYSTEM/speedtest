@@ -13,7 +13,7 @@ import BBIO.PWM as pwm
 #   }
 # but for some reason they don't work. Mismatch between adafruit lib and branch it forked from?
 
-interval = 0.01 # in seconds, it turns out!
+interval = 60 # in seconds, it turns out!
 greenPin = 'P9_14'
 bluePin = 'P9_16' # we're not using blue LED, might not even plug it in - in that case use this for servo
 redPin = 'P8_13'
@@ -30,7 +30,7 @@ def testSpeed():
     p = subprocess.Popen(['speedtest-cli','--simple'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     output, err = p.communicate()
     data = [d for d in output.split('\n') if d.strip()!='']
-    # print data
+    print 'data is ', data
     line = ','.join([
         re.findall(r'[0-9]*\.[0-9]*',entry)[0] 
         for entry in data
@@ -60,6 +60,7 @@ def updateDevice(pingtime, dls, uls):
 	# map ul speed to a little pulse
 	ping = mapVals(pingtime, 0, pingMax, 0, 255)
 	dl = mapVals(out, 0, dlMax, 0, 255)
+    # we don't do anything with ul yet
 
 if __name__ == '__main__':
     #PWM.start(channel, duty, freq=2000)
@@ -67,6 +68,7 @@ print 'starting pwm channels'
     pwm.start(greenPin, 0)
     pwm.start(bluePin,0)
     pwm.start(redPin,0)
+    'done starting pwm channels'
     while True:
         testSpeed()
         time.sleep(interval)
