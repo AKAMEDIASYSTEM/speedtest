@@ -17,7 +17,7 @@ redPin = 'P8_13'
 #PWM.start(channel, duty, freq=2000)
 print 'starting pwm channels'
 pwm.start(greenPin, 50)
-pwm.start(bluePin,0)
+pwm.start(bluePin,0, 50) # 50Hz
 pwm.start(redPin,0)
 
 for j in range(100):
