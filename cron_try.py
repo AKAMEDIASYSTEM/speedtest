@@ -11,15 +11,18 @@ import BBIO.PWM as pwm
 #     "PWM2A" : {"key":"P8_45"},
 #     "PWM2B" : {"key":"P8_13"}
 #   }
+# but for some reason they don't work. Mismatch between adafruit lib and branch it forked from?
+
 interval = 0.01 # in seconds, it turns out!
 greenPin = 'P9_14'
-bluePin = 'P9_16'
+bluePin = 'P9_16' # we're not using blue LED, might not even plug it in - in that case use this for servo
 redPin = 'P8_13'
+servoPin = 'P8_45'
 
 window_size = 29
 pingMax = 300 # in ms
-dlMax = 20 # in Mb/s
-ulMax = 10 # in Mb/s
+dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
+ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
 out = []
 
 def testSpeed():
@@ -35,8 +38,14 @@ def testSpeed():
     # print line
     values = line.split(',')
     print values
-    rgbVal = mapVals(values[0],0,500,0,100)
-    print 'rgbVal is ', rgbVal
+    pingtime = mapVals(values[0],0,500,0,100)
+    dl = mapVals(values[1],0, dlMax, 0, 100)
+    ul = mapVals(values[2],0, ulMax, 0, 100)
+    pwm.set_duty_cycle(greenPin,100-dl)
+    pwm.set_duty_cycle(redPin,dl)
+    pwm.set_duty_cycle(bluePin, pingtime)
+    print 'pingtime is ', pingtime
+    updateDevice(pingtime, dl, ul):
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
 
@@ -60,5 +69,4 @@ print 'starting pwm channels'
     pwm.start(redPin,0)
     while True:
         testSpeed()
-        updateDevice()
         time.sleep(interval)
