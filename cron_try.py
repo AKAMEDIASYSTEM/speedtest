@@ -38,9 +38,9 @@ def testSpeed():
     # print line
     values = line.split(',')
     print 'values is ', values
-    pingtime = mapVals(values[0],0,500,0,100)
-    dl = mapVals(values[1],0, dlMax, 0, 100)
-    ul = mapVals(values[2],0, ulMax, 0, 100)
+    pingtime = mapVals(float(values[0]),0,500,0,100)
+    dl = mapVals(float(values[1]),0, dlMax, 0, 100)
+    ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.start(greenPin,100-dl)
     pwm.start(redPin,dl)
     pwm.start(bluePin, pingtime)
