@@ -61,6 +61,8 @@ def updateDevice(pingtime, dls, uls):
 	ping = mapVals(pingtime, 0, pingMax, 0, 255)
 	dl = mapVals(out, 0, dlMax, 0, 255)
     # we don't do anything with ul yet
+    pwm.start(redPin, 100-dl)
+    pwm.start(greenPin, dl)
 
 if __name__ == '__main__':
     #PWM.start(channel, duty, freq=2000)
