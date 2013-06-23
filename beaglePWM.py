@@ -14,6 +14,14 @@ greenPin = 'P9_14'
 bluePin = 'P9_16'
 redPin = 'P8_13'
 
+def mapVals(val, inMin, inMax, outMin, outMax):
+    toRet = outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+    if (toRet > outMax):
+        toRet = outMax
+    if (toRet < outMin):
+        toRet = outMin
+    return toRet
+
 #PWM.start(channel, duty, freq=2000)
 # print 'starting pwm channels'
 # pwm.start(greenPin, 50.0)
@@ -36,10 +44,3 @@ for j in range(100):
 
 pwm.cleanup()
 
-def mapVals(val, inMin, inMax, outMin, outMax):
-    toRet = outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
-    if (toRet > outMax):
-        toRet = outMax
-    if (toRet < outMin):
-        toRet = outMin
-    return toRet
