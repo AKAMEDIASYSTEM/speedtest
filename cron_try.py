@@ -54,11 +54,11 @@ def testSpeed():
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
-    if (toRet > outMax):
-        toRet = outMax
-    if (toRet < outMin):
-        toRet = outMin
-    return toRet
+    # if (toRet > outMax):
+    #     toRet = outMax
+    # if (toRet < outMin):
+    #     toRet = outMin
+    return clamp(toRet, outMin, outMax)
 
 def clamp(val, min, max):
     if (val < min):
@@ -74,7 +74,7 @@ def servo(pinName,position):
     # max 90, we are guessing this is a 2ms pulse
     # 2ms pulse is 10% duty cycle
     # we are guessing it's a 50Hz (20ms) base freq
-    rot = mapVal(position,0,180,5, 10)
+    rot = mapVals(position,0,180,5, 10)
     if (rot < 0): rot = 0
     if (rot > 180): rot = 180
     pwm.start(pinName, rot)
