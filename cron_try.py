@@ -69,6 +69,8 @@ def servo(pinName,position):
     # 2ms pulse is 10% duty cycle
     # we are guessing it's a 50Hz (20ms) base freq
     rot = mapVal(position,0,180,5, 10)
+    if (rot < 0): rot = 0
+    if (rot > 180): rot = 180
     pwm.start(pinName, rot)
 
 def updateDevice(pingtime, dls, uls):
