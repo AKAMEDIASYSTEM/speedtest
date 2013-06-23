@@ -40,14 +40,8 @@ def testSpeed():
     values = line.split(',')
     print 'values is ', values
     pingtime = mapVals(float(values[0]),0,1000,0,180)
-    if (pingtime <0): pingtime=0
-    if (pingtime > 180): pingtime = 180
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
-    if (dl <0): dl=0
-    if (dl > 100): dl = 100
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
-    if (ul <0): ul=0
-    if (ul > 100): ul = 100
     pwm.start(greenPin,100-dl)
     pwm.start(redPin,dl)
     # pwm.start(bluePin, pingtime)
@@ -59,7 +53,19 @@ def testSpeed():
     # open("recent_test.txt","w").write('\n'.join(out))
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-    return outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+    toRet = outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+    if (toRet > outMax):
+        toRet = outMax
+    if (toRet < outMin):
+        toRet = outMin
+    return toRet
+
+def clamp(val, min, max):
+    if (val < min):
+        val = min
+    if (val > max):
+        val = max
+    return val
 
 def servo(pinName,position):
     # position should be 0-180, with 90 and center
