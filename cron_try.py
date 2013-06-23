@@ -45,7 +45,8 @@ def testSpeed():
     pwm.start(greenPin,100-dl)
     pwm.start(redPin,dl)
     pwm.start(bluePin, pingtime)
-    print 'pingtime is ', pingtime
+    print 'pingtime is', pingtime
+    print 'dl is', dl
     # updateDevice(pingtime, dl, ul)
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
