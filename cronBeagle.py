@@ -23,7 +23,18 @@ servoPin = 'P8_45'
 # max=95 and min=90 because the duty cycle is inverted??
 
 servoMax = 10.0
-servoMin = 5.0 
+servoMin = 5.0
+
+# from sparkfun small-servo product comments (I think this is my type of servo)
+# Here is what I found out with this servo.
+# Wiring:
+# Red: 5V
+# Brown: ground
+# Yellow: signal
+# Timing: Stable values
+# Right at 0.50mS (about 85 degrees)
+# Left at 2.0mS (about -85 degrees)
+# Center at 1.25ms (about 0 degrees)
 
 window_size = 29
 pingMax = 300 # in ms
