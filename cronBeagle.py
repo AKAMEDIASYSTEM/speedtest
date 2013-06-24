@@ -82,7 +82,7 @@ def servo(pinName,position):
     # we are guessing it's a 50Hz (20ms) base freq
     rot = mapVals(position,0,180,servoMin, servoMax)
     print 'servo position should be', rot
-    pwm.start(pinName, rot)
+    pwm.start(pinName, rot, 50.0)
 
 def updateDevice(pingtime, dls, uls):
     ping = mapVals(pingtime, 0, pingMax, 0, 255)
