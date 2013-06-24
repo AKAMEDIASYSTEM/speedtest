@@ -45,7 +45,7 @@ def testSpeed():
     # print line
     values = line.split(',')
     print 'values is ', values
-    pingtime = mapVals(float(values[0]),0,1000,0,180)
+    pingtime = mapVals(float(values[0]),0,1000,0,160) #changed to 160 deg total rot to be safe
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.start(greenPin,100-dl)
