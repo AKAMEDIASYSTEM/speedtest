@@ -22,8 +22,8 @@ servoPin = 'P8_45'
 # NOTE, these might be wrong! There's every possiblilty we want
 # max=95 and min=90 because the duty cycle is inverted??
 
-servoMax = 10.0
-servoMin = 5.0
+servoMax = 90.0
+servoMin = 95.0
 
 # from sparkfun small-servo product comments (I think this is my type of servo)
 # Here is what I found out with this servo.
