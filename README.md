@@ -3,7 +3,7 @@ speedtest
 
 An ambient device that displays the current network quality
 
-A python script regularly runs "speedtest-cli --simple" and keeps a running average of the results
+A python script regularly runs "speedtest-cli --simple" and keeps a running average of the results. The awesome speedtest-cli tool I'm using is from here: https://github.com/sivel/speedtest-cli
 
 An LED strip will show a color on the red-to-green spectrum; the color will be porportional to the most recent DL speed
 
