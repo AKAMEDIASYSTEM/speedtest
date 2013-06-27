@@ -86,9 +86,9 @@ def clamp(val, min, max):
 
 def servo(pinName,position):
     # position should be 0-180, with 90 and center
-    # min -90, we are guessing this is a 1ms pulse
+    # min -90deg, we are guessing this is a 1ms pulse
     # 1ms pulse is 5% duty cycle
-    # max 90, we are guessing this is a 2ms pulse
+    # max 90deg, we are guessing this is a 2ms pulse
     # 2ms pulse is 10% duty cycle
     # we are guessing it's a 50Hz (20ms) base freq
     rot = mapVals(position,0,180,servoMin, servoMax)

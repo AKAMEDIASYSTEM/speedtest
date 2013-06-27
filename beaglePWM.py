@@ -40,8 +40,10 @@ for j in range(100):
 	
 	for i in range(100):
 		# print i
+		rot = mapVals(i,0,100,5.0,10.0)
+		print rot
 		pwm.set_duty_cycle(greenPin, i)
-		pwm.set_duty_cycle(bluePin, j+1)
+		pwm.set_duty_cycle(bluePin, rot)
 		pwm.set_duty_cycle(redPin, 100-i)
 		time.sleep(interval)
 
