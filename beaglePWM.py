@@ -20,6 +20,7 @@ def mapVals(val, inMin, inMax, outMin, outMax):
         toRet = outMax
     if (toRet < outMin):
         toRet = outMin
+        print 'toRet is ',toRet
     return toRet
 
 #PWM.start(channel, duty, freq=2000)
