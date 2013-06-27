@@ -35,8 +35,8 @@ for j in range(100):
 	print rot
 	pwm.start(greenPin, 50, 2000)
 	pwm.start(bluePin, rot, frequency=50.0) # 50Hz
-	pwm.set_frequency(pin, 50.0)
-	pwm.set_duty_cycle(pin, rot)
+	pwm.set_frequency(bluePin, 50.0)
+	pwm.set_duty_cycle(bluePin, rot)
 	pwm.start(redPin, 0, 2000)
 
 	# rot = mapVals(j,0.0,100.0,5.0,20.0)
