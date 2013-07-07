@@ -31,7 +31,7 @@ def mapVals(val, inMin, inMax, outMin, outMax):
 while True:
 	for j in range(100):
 		print 'starting pwm channels', j
-		rot = mapVals(j,0,100,0,100)
+		rot = mapVals(j,0.0,100.0,0.0,100.0)
 		print rot
 		pwm.start(greenPin, 100-j, 50)
 		pwm.start(bluePin, rot, 50) # 50Hz
