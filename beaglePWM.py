@@ -29,7 +29,7 @@ while True:
 	print 'starting pwm channels'
 	pwm.start(greenPin, 50.0, 50)
 	pwm.start(bluePin, 50.0, 50) # 50Hz
-	pwm.start(redPin, 0.0, 50)
+	pwm.start(redPin, 50.0, 50)
 	for j in range(100):
 		print j
 		# rot = mapVals(j,0.0,100.0,90.0,95.0)
