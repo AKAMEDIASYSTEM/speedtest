@@ -36,11 +36,15 @@ servoMin = 5.0
 # Left at 2.0mS (about -85 degrees)
 # Center at 1.25ms (about 0 degrees)
 
-window_size = 29
+window_size = 29 # not using this yet
+dlWindow = []
+ulWindow = []
+pingWindow = []
 pingMax = 300 # in ms
 dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
 ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
 out = []
+
 
 def testSpeed():
     pwm.start(bluePin,50)
