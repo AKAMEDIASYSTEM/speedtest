@@ -36,7 +36,7 @@ while True:
 		rot = mapVals(j,0.0,100.0,5.0,10.0)
 		print rot
 		# pwm.set_duty_cycle(greenPin, 100-j)
-		pwm.set_duty_cycle(bluePin, rot) # 50Hz
+		pwm.set_duty_cycle(redPin, rot) # 50Hz
 		# pwm.set_frequency(bluePin, 50.0)
 		# pwm.set_duty_cycle(bluePin, rot)
 		# pwm.set_duty_cycle(redPin, j)
