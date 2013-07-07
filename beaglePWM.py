@@ -24,20 +24,21 @@ def mapVals(val, inMin, inMax, outMin, outMax):
     return toRet
 
 #PWM.start(channel, duty, freq=2000)
-# print 'starting pwm channels'
-# pwm.start(greenPin, 50.0)
-# pwm.start(bluePin, 50.0, 50.0) # 50Hz
-# pwm.start(redPin, 0.0)
+
 while True:
+	print 'starting pwm channels'
+	pwm.start(greenPin, 50.0)
+	pwm.start(bluePin, 50.0, 50.0) # 50Hz
+	pwm.start(redPin, 0.0)
 	for j in range(100):
-		print 'starting pwm channels', j
+		print j
 		rot = mapVals(j,0.0,100.0,0.0,100.0)
 		print rot
-		pwm.start(greenPin, 100-j, 50)
-		# pwm.start(bluePin, j, 50) # 50Hz
+		pwm.set_duty_cycle(greenPin, 100-j)
+		pwm.set_duty_cycle(bluePin, j) # 50Hz
 		# pwm.set_frequency(bluePin, 50.0)
 		# pwm.set_duty_cycle(bluePin, rot)
-		pwm.start(redPin, j, 50)
+		pwm.set_duty_cycle(redPin, j)
 
 		# rot = mapVals(j,0.0,100.0,5.0,20.0)
 		# print 'rot is',rot
