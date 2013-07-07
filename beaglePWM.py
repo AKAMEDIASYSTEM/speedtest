@@ -28,29 +28,29 @@ def mapVals(val, inMin, inMax, outMin, outMax):
 # pwm.start(greenPin, 50.0)
 # pwm.start(bluePin, 50.0, 50.0) # 50Hz
 # pwm.start(redPin, 0.0)
+while True:
+	for j in range(100):
+		print 'starting pwm channels', j
+		rot = mapVals(j,0.0,100.0,0.0,100.0)
+		print rot
+		pwm.start(greenPin, 100-j, 2000)
+		pwm.start(bluePin, rot, 50) # 50Hz
+		# pwm.set_frequency(bluePin, 50.0)
+		# pwm.set_duty_cycle(bluePin, rot)
+		pwm.start(redPin, j, 2000)
 
-for j in range(100):
-	print 'starting pwm channels', j
-	rot = mapVals(j,0.0,100.0,0.0,100.0)
-	print rot
-	pwm.start(greenPin, 100-j, 2000)
-	pwm.start(bluePin, rot, 50) # 50Hz
-	# pwm.set_frequency(bluePin, 50.0)
-	# pwm.set_duty_cycle(bluePin, rot)
-	pwm.start(redPin, j, 2000)
-
-	# rot = mapVals(j,0.0,100.0,5.0,20.0)
-	# print 'rot is',rot
-	# pwm.set_duty_cycle(bluePin, rot) # servo ms timing experiment
-	time.sleep(interval)
-	# for i in range(100):
-	# 	# print i
-		
-	# 	pwm.set_duty_cycle(greenPin, i)
-		
-	# 	pwm.set_duty_cycle(redPin, 100-i)
-	# 	time.sleep(interval)
+		# rot = mapVals(j,0.0,100.0,5.0,20.0)
+		# print 'rot is',rot
+		# pwm.set_duty_cycle(bluePin, rot) # servo ms timing experiment
+		time.sleep(interval)
+		# for i in range(100):
+		# 	# print i
+			
+		# 	pwm.set_duty_cycle(greenPin, i)
+			
+		# 	pwm.set_duty_cycle(redPin, 100-i)
+		# 	time.sleep(interval)
 
 
-pwm.cleanup()
+	pwm.cleanup()
 
