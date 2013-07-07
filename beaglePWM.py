@@ -41,8 +41,9 @@ while True:
 		time.sleep(interval)
 
 	for k in range(100):
+		njn = 100-k;
 		pwm.set_duty_cycle(greenPin, k)
-		pwm.set_duty_cycle(bluePin, k)
+		pwm.set_duty_cycle(bluePin, njn)
 		pwm.set_duty_cycle(redPin, 100-k)
 		time.sleep(interval)
 	pwm.cleanup()
