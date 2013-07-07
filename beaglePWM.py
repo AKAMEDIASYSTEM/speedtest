@@ -37,24 +37,13 @@ while True:
 		print rot
 		pwm.set_duty_cycle(greenPin, 100-j)
 		pwm.set_duty_cycle(bluePin, rot) # 50Hz
-		# pwm.set_frequency(bluePin, 50.0)
-		# pwm.set_duty_cycle(bluePin, rot)
 		pwm.set_duty_cycle(redPin, j)
-
-		# rot = mapVals(j,0.0,100.0,5.0,20.0)
-		# print 'rot is',rot
-		# pwm.set_duty_cycle(bluePin, rot) # servo ms timing experiment
 		time.sleep(interval)
-		# for i in range(100):
-		# 	# print i
-			
-		# 	pwm.set_duty_cycle(greenPin, i)
-			
-		# 	pwm.set_duty_cycle(redPin, 100-i)
-		# 	time.sleep(interval)
+
 	for k in range(100):
 		pwm.set_duty_cycle(greenPin, k)
 		pwm.set_duty_cycle(bluePin, mapVals(k,0,100,90,95))
 		pwm.set_duty_cycle(redPin, 100-k)
+		time.sleep(interval)
 	pwm.cleanup()
 
