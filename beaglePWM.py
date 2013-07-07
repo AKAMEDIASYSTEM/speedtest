@@ -52,7 +52,9 @@ while True:
 			
 		# 	pwm.set_duty_cycle(redPin, 100-i)
 		# 	time.sleep(interval)
-
-
+	for k in range(100):
+		pwm.set_duty_cycle(greenPin, k)
+		pwm.set_duty_cycle(bluePin, mapVals(k,0,100,90,95))
+		pwm.set_duty_cycle(redPin, 100-k)
 	pwm.cleanup()
 
