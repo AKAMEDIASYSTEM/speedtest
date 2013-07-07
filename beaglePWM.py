@@ -33,11 +33,11 @@ for j in range(100):
 	print 'starting pwm channels', j
 	rot = mapVals(j,0.0,100.0,5.0,10.0)
 	print rot
-	pwm.start(greenPin, 50, 2000)
-	pwm.start(bluePin, j, 50) # 50Hz
+	pwm.start(greenPin, 100-j, 2000)
+	pwm.start(bluePin, rot, 50) # 50Hz
 	# pwm.set_frequency(bluePin, 50.0)
 	# pwm.set_duty_cycle(bluePin, rot)
-	pwm.start(redPin, 0, 2000)
+	pwm.start(redPin, j, 2000)
 
 	# rot = mapVals(j,0.0,100.0,5.0,20.0)
 	# print 'rot is',rot
