@@ -9,7 +9,7 @@ import time
 #     "PWM2A" : {"key":"P8_45"},
 #     "PWM2B" : {"key":"P8_13"}
 #   }
-interval = 0.01
+interval = 0.1
 greenPin = 'P9_14'
 bluePin = 'P9_16'
 redPin = 'P8_13'
@@ -31,10 +31,10 @@ def mapVals(val, inMin, inMax, outMin, outMax):
 
 for j in range(100):
 	print 'starting pwm channels', j
-	rot = mapVals(j,0.0,100.0,0,100)
+	rot = mapVals(j,0.0,100.0,5.0,10.0)
 	print rot
 	pwm.start(greenPin, 50, 2000)
-	pwm.start(bluePin, j, 100) # 50Hz
+	pwm.start(bluePin, j, 50) # 50Hz
 	# pwm.set_frequency(bluePin, 50.0)
 	# pwm.set_duty_cycle(bluePin, rot)
 	pwm.start(redPin, 0, 2000)
@@ -42,14 +42,14 @@ for j in range(100):
 	# rot = mapVals(j,0.0,100.0,5.0,20.0)
 	# print 'rot is',rot
 	# pwm.set_duty_cycle(bluePin, rot) # servo ms timing experiment
-	
-	for i in range(100):
-		# print i
+	time.sleep(interval)
+	# for i in range(100):
+	# 	# print i
 		
-		pwm.set_duty_cycle(greenPin, i)
+	# 	pwm.set_duty_cycle(greenPin, i)
 		
-		pwm.set_duty_cycle(redPin, 100-i)
-		time.sleep(interval)
+	# 	pwm.set_duty_cycle(redPin, 100-i)
+	# 	time.sleep(interval)
 
 
 pwm.cleanup()
