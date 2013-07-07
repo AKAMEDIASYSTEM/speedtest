@@ -52,5 +52,5 @@ for j in range(100):
 	# 	time.sleep(interval)
 
 
-pwm.cleanup()
+	pwm.cleanup()
 
