@@ -20,7 +20,7 @@ def mapVals(val, inMin, inMax, outMin, outMax):
         toRet = outMax
     if (toRet < outMin):
         toRet = outMin
-    print 'toRet is ',toRet
+    # print 'toRet is ',toRet
     return toRet
 
 #PWM.start(channel, duty, freq=2000)
@@ -32,10 +32,10 @@ while True:
 	pwm.start(redPin, 0.0)
 	for j in range(100):
 		print j
-		rot = mapVals(j,0.0,100.0,0.0,100.0)
+		rot = mapVals(j,0.0,100.0,5.0,10.0)
 		print rot
 		pwm.set_duty_cycle(greenPin, 100-j)
-		pwm.set_duty_cycle(bluePin, j) # 50Hz
+		pwm.set_duty_cycle(bluePin, rot) # 50Hz
 		# pwm.set_frequency(bluePin, 50.0)
 		# pwm.set_duty_cycle(bluePin, rot)
 		pwm.set_duty_cycle(redPin, j)
