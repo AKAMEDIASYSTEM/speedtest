@@ -9,7 +9,7 @@ import time
 #     "PWM2A" : {"key":"P8_45"},
 #     "PWM2B" : {"key":"P8_13"}
 #   }
-interval = .5
+interval = .1
 greenPin = 'P9_14'
 bluePin = 'P9_16'
 redPin = 'P8_13'
