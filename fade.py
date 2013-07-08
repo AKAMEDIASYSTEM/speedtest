@@ -5,7 +5,7 @@
 # This example is in the public domain
 
 # Import PyBBIO library:
-from BBIO import *
+from Adafruit_BBIO import *
 
 LED = 'P9_14' 
 brightness = 0  # Global variable to store brightness level
