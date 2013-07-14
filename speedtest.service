@@ -2,7 +2,7 @@
 Description=Start Python Speedtest service
 
 [Service]
-WorkingDirectory=~/speedtest/
+WorkingDirectory=/home/root/speedtest_project/speedtest/
 ExecStart=/usr/bin/python cronBeagle.py
 KillMode=process
 
