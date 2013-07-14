@@ -385,7 +385,7 @@ def speedtest():
                '%(latency)s ms' % best)
     else:
         print 'Ping: %(latency)s ms' % best
-        output.append(best.latency)
+        output.append(best['latency'])
         print 'best is ', best
 
     sizes = [350, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
