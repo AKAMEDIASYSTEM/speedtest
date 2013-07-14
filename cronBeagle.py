@@ -114,6 +114,8 @@ def updateDevice(pingtime, dls, uls):
 
 if __name__ == '__main__':
     #PWM.start(channel, duty, freq=2000)
+    sys.path.insert(0, '/usr/local/bin')
+    import speedtest-cli
     print 'starting pwm channels'
     pwm.start(greenPin, 0)
     pwm.start(bluePin,0)
