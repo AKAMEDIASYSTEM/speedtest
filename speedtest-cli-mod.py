@@ -456,7 +456,7 @@ def speedtest():
     return output
 
 def testSpeed():
-    pwm.start(bluePin,50)
+    pwm.start(bluePin,50,2000)
     print 'TESTING SPEED'
     # p = subprocess.Popen(['speedtest-cli','--simple'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
     # output, err = p.communicate()
@@ -470,11 +470,11 @@ def testSpeed():
     # values = line.split(',')
     # print 'values is ', values
     values = speedtest()
-    pingtime = mapVals(float(values[0]),0,1000,0,160) #changed to 160 deg total rot to be safe
+    pingtime = mapVals(float(values[0]),0,1000,10,170) #changed to 160 deg total rot to be safe
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
-    pwm.start(greenPin,100-dl)
-    pwm.start(redPin,dl)
+    pwm.start(greenPin,100-dl,2000)
+    pwm.start(redPin,dl,2000)
     # pwm.start(bluePin, pingtime)
     servo(bluePin, pingtime)
     print 'pingtime in servo degrees is', pingtime
