@@ -524,11 +524,12 @@ def updateDevice(pingtime, dls, uls):
 if __name__ == '__main__':
  #PWM.start(channel, duty, freq=2000)
     print os.system('whoami')
-    print 'starting pwm channels'
+    # print 'starting pwm channels'
     pwm.start(greenPin, 0, 2000)
     pwm.start(bluePin,0, 2000)
     pwm.start(redPin,0, 2000)
-    print 'done starting pwm channels'
+    time.sleep(15)
+    # print 'done starting pwm channels'
     while True:
         testSpeed()
         time.sleep(interval)
