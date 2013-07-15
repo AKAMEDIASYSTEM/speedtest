@@ -4,7 +4,7 @@ Description=Start Python Speedtest service
 [Service]
 Type=forking
 WorkingDirectory=/home/root/speedtest_project/speedtest/
-ExecStart=/usr/bin/python speedtest-cli-mod.py
+ExecStart=/usr/bin/python /home/root/speedtest_project/speedtest/speedtest-cli-mod.py
 KillMode=process
 
 [Install]
