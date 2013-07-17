@@ -528,7 +528,7 @@ if __name__ == '__main__':
     pwm.start(greenPin, 0, 2000)
     pwm.start(bluePin,0, 2000)
     pwm.start(redPin,0, 2000)
-    time.sleep(15)
+    # time.sleep(15)
     # print 'done starting pwm channels'
     while True:
         testSpeed()
