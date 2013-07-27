@@ -81,6 +81,12 @@ dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more com
 ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
 out = []
 
+# Adafruit servo tutorial stuff
+duty_min = 3
+duty_max = 14.5
+duty_span = duty_max - duty_min
+
+# duty = 100 - ((angle_f / 180) * duty_span + duty_min)
 
 def distance(origin, destination):
     """Determine distance between 2 sets of [lat,lon] in km"""
@@ -505,9 +511,10 @@ def servo(pinName,position):
     # max 90deg, we are guessing this is a 2ms pulse
     # 2ms pulse is 10% duty cycle
     # we are guessing it's a 50Hz (20ms) base freq
+    duty = 100 - ((position / 180) * duty_span + duty_min)
     rot = mapVals(position,0,180,servoMin, servoMax)
-    print 'servo position should be', rot
-    pwm.start(pinName, rot, 50.0)
+    print 'duty should be', duty
+    pwm.start(pinName, (100-duty_min), 60.0)
 
 def updateDevice(pingtime, dls, uls):
     ping = mapVals(pingtime, 0, pingMax, 0, 255)
