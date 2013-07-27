@@ -53,7 +53,7 @@ interval = 60 # in seconds, it turns out!
 greenPin = 'P9_14'
 bluePin = 'P9_16' # we're not using blue LED, might not even plug it in - in that case use this for servo
 redPin = 'P8_13'
-servoPin = 'P8_45'
+servoPin = 'P8_19'
 
 # NOTE, these might be wrong! There's every possiblilty we want
 # max=95 and min=90 because the duty cycle is inverted??
