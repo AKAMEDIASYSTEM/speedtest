@@ -462,25 +462,15 @@ def speedtest():
     return output
 
 def testSpeed():
-    pwm.start(bluePin,50,2000)
+    pwm.start(bluePin,50,60.0)
     print 'TESTING SPEED'
-    # p = subprocess.Popen(['speedtest-cli','--simple'],stdout=subprocess.PIPE,stderr=subprocess.PIPE)
-    # output, err = p.communicate()
-    # data = [d for d in output.split('\n') if d.strip()!='']
-    # print 'data is ', data
-    # line = ','.join([
-    #     re.findall(r'[0-9]*\.[0-9]*',entry)[0] 
-    #     for entry in data
-    # ])
-    # # print line
-    # values = line.split(',')
-    # print 'values is ', values
+
     values = speedtest()
     pingtime = mapVals(float(values[0]),0,1000,10,170) #changed to 160 deg total rot to be safe
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
-    pwm.start(greenPin,100-dl,2000)
-    pwm.start(redPin,dl,2000)
+    pwm.start(greenPin,100.0-dl,2000.0)
+    pwm.start(redPin,dl,2000.0)
     # pwm.start(bluePin, pingtime)
     servo(bluePin, pingtime)
     print 'pingtime in servo degrees is', pingtime
@@ -514,7 +504,7 @@ def servo(pinName,position):
     duty = 100 - ((position / 180) * duty_span + duty_min)
     rot = mapVals(position,0,180,servoMin, servoMax)
     print 'duty should be', duty
-    pwm.start(pinName, (100-duty_min), 60.0)
+    pwm.set_duty_cycle(pinName, (100-duty_min))
 
 def updateDevice(pingtime, dls, uls):
     ping = mapVals(pingtime, 0, pingMax, 0, 255)
@@ -532,9 +522,9 @@ if __name__ == '__main__':
  #PWM.start(channel, duty, freq=2000)
     print os.system('whoami')
     # print 'starting pwm channels'
-    pwm.start(greenPin, 0, 2000)
-    pwm.start(bluePin,0, 2000)
-    pwm.start(redPin,0, 2000)
+    pwm.start(greenPin, 0, 2000.0)
+    pwm.start(bluePin,0, 60.0)
+    pwm.start(redPin,0, 2000.0)
     # time.sleep(15)
     # print 'done starting pwm channels'
     while True:
