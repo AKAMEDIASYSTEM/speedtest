@@ -471,8 +471,8 @@ def testSpeed():
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.start(greenPin,100.0-dl,2000.0)
     pwm.start(redPin,dl,2000.0)
-    pwm.start(bluePin, 60.0)
-    servo(bluePin, pingtime)
+    pwm.start(servoPin, 60.0)
+    servo(servoPin, pingtime)
     print 'pingtime in servo degrees is', pingtime
     print 'dl is', dl
     # updateDevice(pingtime, dl, ul)
