@@ -40,20 +40,11 @@ try:
 except ImportError:
     from optparse import OptionParser as ArgParser
 
-# from source on github:
-# PWM_PINS = {
-#     "PWM1A" : {"key":"P9_14"},
-#     "PWM1B" : {"key":"P9_16"},
-#     "PWM2A" : {"key":"P8_45"},
-#     "PWM2B" : {"key":"P8_13"}
-#   }
-# but for some reason they don't work. Mismatch between adafruit lib and branch it forked from?
-
 interval = 60 # in seconds, it turns out!
-greenPin = 'P9_14'
-bluePin = 'P9_16' # we're not using blue LED, might not even plug it in - in that case use this for servo
+greenPin = 'P8_13'
+bluePin = 'P9_14' # we're not using blue LED, might not even plug it in
 redPin = 'P8_19'
-servoPin = 'P8_13'
+servoPin = 'P9_16'
 
 # NOTE, these might be wrong! There's every possiblilty we want
 # max=95 and min=90 because the duty cycle is inverted??
