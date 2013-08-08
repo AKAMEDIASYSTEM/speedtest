@@ -464,7 +464,7 @@ def testSpeed():
     # pwm.start(servoPin, 60.0)
     # servo(servoPin, pingtime)
     print 'pingtime in servo degrees is', pingtime
-    print 'dl is', dl
+    print 'dl is %s percent red', dl
     # updateDevice(pingtime, dl, ul)
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
