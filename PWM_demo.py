@@ -12,5 +12,5 @@ while True:
 		time.sleep(interval)
 	for i in range(0,100):
 		pwm.set_duty_cycle(redPin,100.0-i)
-		pwm.set_duty_cycle(greenPin,float(i)
+		pwm.set_duty_cycle(greenPin,float(i))
 		time.sleep(interval)
