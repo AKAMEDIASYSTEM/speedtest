@@ -15,6 +15,7 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
+import atexit
 import urllib2
 import math
 import time
@@ -44,7 +45,7 @@ interval = 60 # in seconds, it turns out!
 greenPin = 'P8_13'
 bluePin = 'P9_14' # we're not using blue LED, might not even plug it in
 redPin = 'P8_19'
-servoPin = 'P9_16'
+servoPin = 'P9_16' # also not in use for NYTLABS implementation
 
 # NOTE, these might be wrong! There's every possiblilty we want
 # max=95 and min=90 because the duty cycle is inverted??
@@ -508,6 +509,14 @@ def updateDevice(pingtime, dls, uls):
     # which is 50 steps on a stepper motor...
     # map ul speed to a little pulse
 
+def exit_handler():
+    print 'exiting'
+    pwm.stop(greenPin)
+    pwm.stop(redPin)
+    pwm.stop(bluePin)
+    pwm.stop(servoPin)
+    pwm.cleanup()
+
 if __name__ == '__main__':
     #PWM.start(channel, duty, freq=2000)
     # print os.system('whoami')
@@ -517,6 +526,7 @@ if __name__ == '__main__':
     pwm.start(redPin, 10.0, 2000.0)
     # time.sleep(15)
     # print 'done starting pwm channels'
+    atexit.register(exit_handler)
     while True:
         try:
             testSpeed()
