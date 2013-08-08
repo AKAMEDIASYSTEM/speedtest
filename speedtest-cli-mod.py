@@ -455,7 +455,6 @@ def speedtest():
 def testSpeed():
     pwm.start(bluePin,50,60.0)
     print 'TESTING SPEED'
-
     values = speedtest()
     pingtime = mapVals(float(values[0]),0,1000,10,170) #changed to 160 deg total rot to be safe
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
