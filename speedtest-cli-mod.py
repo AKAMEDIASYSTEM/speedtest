@@ -460,8 +460,8 @@ def testSpeed():
     pingtime = mapVals(float(values[0]),0,1000,10,170) #changed to 160 deg total rot to be safe
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
-    pwm.set_duty_cycle(greenPin,100.0-dl)
-    pwm.set_duty_cycle(redPin,dl+0.0)
+    pwm.set_duty_cycle(redPin,100.0-dl)
+    pwm.set_duty_cycle(greenPin,dl+0.0)
     # pwm.start(servoPin, 60.0)
     # servo(servoPin, pingtime)
     print 'pingtime in servo degrees is', pingtime
