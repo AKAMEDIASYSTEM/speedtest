@@ -460,7 +460,7 @@ def testSpeed():
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.set_duty_cycle(greenPin,100.0-dl)
-    pwm.set_duty_cycle(redPin,dl)
+    pwm.set_duty_cycle(redPin,dl+0.0)
     # pwm.start(servoPin, 60.0)
     # servo(servoPin, pingtime)
     print 'pingtime in servo degrees is', pingtime
@@ -509,12 +509,12 @@ def updateDevice(pingtime, dls, uls):
     # map ul speed to a little pulse
 
 if __name__ == '__main__':
- #PWM.start(channel, duty, freq=2000)
+    #PWM.start(channel, duty, freq=2000)
     # print os.system('whoami')
     # print 'starting pwm channels'
-    pwm.start(greenPin, 10, 2000.0)
+    pwm.start(greenPin, 10.0, 2000.0)
     # pwm.start(bluePin,0, 60.0)
-    pwm.start(redPin,10, 2000.0)
+    pwm.start(redPin, 10.0, 2000.0)
     # time.sleep(15)
     # print 'done starting pwm channels'
     while True:
