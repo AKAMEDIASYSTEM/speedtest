@@ -502,7 +502,7 @@ def servo(pinName,position):
     # 2ms pulse is 10% duty cycle
     # we are guessing it's a 50Hz (20ms) base freq
     duty = 100 - ((position / 180) * duty_span + duty_min)
-    rot = mapVals(position,0,180,servoMin, servoMax)
+    # rot = mapVals(position,0,180,servoMin, servoMax)
     print 'duty should be', duty
     pwm.set_duty_cycle(pinName, (100-duty_min))
 
@@ -528,7 +528,10 @@ if __name__ == '__main__':
     # time.sleep(15)
     # print 'done starting pwm channels'
     while True:
-        testSpeed()
+        try:
+            testSpeed()
+        except:
+            pass
         time.sleep(interval)
 
 # vim:ts=4:sw=4:expandtab
