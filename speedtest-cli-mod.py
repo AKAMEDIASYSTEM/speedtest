@@ -446,7 +446,7 @@ def speedtest():
     return output
 
 def do_speedtest_and_update_display():
-    print 'TESTING SPEED'
+    print 'TESTING SPEED, ', time.time()
     values = speedtest()
     pingtime = mapVals(float(values[0]),0,pingMax,0,180)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
