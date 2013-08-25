@@ -544,7 +544,7 @@ else:
     # time.sleep(15)
     # print 'done starting pwm channels'
     atexit.register(exit_handler)
-    time.sleep(120) # sleep for 2 minutes on boot to give network time to come up
+    # time.sleep(120) # sleep for 2 minutes on boot to give network time to come up
     while True:
         try:
             testSpeed()
