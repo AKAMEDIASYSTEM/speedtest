@@ -47,9 +47,6 @@ bluePin = 'P9_14' # we're not using blue LED, might not even plug it in
 redPin = 'P8_19'
 servoPin = 'P9_16' # also not in use for NYTLABS implementation
 
-# NOTE, these might be wrong! There's every possiblilty we want
-# max=95 and min=90 because the duty cycle is inverted??
-
 servo_duty_min = 3.0
 servo_duty_max = 14.5
 servo_duty_span = servo_duty_max - servo_duty_min
@@ -73,13 +70,6 @@ pingMax = 300 # in ms
 dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
 ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
 out = []
-
-# Adafruit servo tutorial stuff
-duty_min = 3
-duty_max = 14.5
-duty_span = duty_max - duty_min
-
-# duty = 100 - ((angle_f / 180) * duty_span + duty_min)
 
 def distance(origin, destination):
     """Determine distance between 2 sets of [lat,lon] in km"""
@@ -491,18 +481,6 @@ def servo(pinName,position):
     print 'duty should be', duty
     pwm.set_duty_cycle(servoPin, duty)
 
-def updateDevice(pingtime, dls, uls):
-    ping = mapVals(pingtime, 0, pingMax, 0, 255)
-    dl = mapVals(out, 0, dlMax, 0, 255)
-    # we don't do anything with ul yet
-    pwm.start(redPin, 100-dl)
-    pwm.start(greenPin, dl)
-    # make a mapping from most recent speedtest info
-    # map dl speed to a red-to-green spectrum
-    # map ping time to an angle from 0 to 90 degrees(?)
-    # which is 50 steps on a stepper motor...
-    # map ul speed to a little pulse
-
 def exit_handler():
     print 'exiting'
     pwm.stop(greenPin)
@@ -512,16 +490,13 @@ def exit_handler():
     pwm.cleanup()
 
 #PWM.start(channel, duty, freq=2000)
-# print os.system('whoami')
-# print 'starting pwm channels'
 pwm.start(greenPin, 10.0, 2000.0)
-# pwm.start(bluePin,0, 60.0)
+# pwm.start(bluePin,10, 60.0)
 pwm.start(redPin, 10.0, 2000.0)
 pwm.start(servoPin, (100 - servo_duty_min), 60.0)
-# time.sleep(15)
+time.sleep(15)
 # print 'done starting pwm channels'
 atexit.register(exit_handler)
-# time.sleep(120) # sleep for 2 minutes on boot to give network time to come up
 while True:
     try:
         do_speedtest_and_update_display()
