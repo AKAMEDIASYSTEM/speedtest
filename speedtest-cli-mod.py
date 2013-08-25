@@ -51,6 +51,16 @@ servo_duty_min = 3.0
 servo_duty_max = 14.5
 servo_duty_span = servo_duty_max - servo_duty_min
 
+window_size = 29 # not using this yet
+dlWindow = []
+ulWindow = []
+pingWindow = []
+
+pingMax = 1000 # in ms
+dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
+ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
+out = []
+
 # from sparkfun small-servo product comments (I think this is my type of servo)
 # Here is what I found out with this servo.
 # Wiring:
@@ -61,15 +71,6 @@ servo_duty_span = servo_duty_max - servo_duty_min
 # Right at 0.50mS (about 85 degrees)
 # Left at 2.0mS (about -85 degrees)
 # Center at 1.25ms (about 0 degrees)
-
-window_size = 29 # not using this yet
-dlWindow = []
-ulWindow = []
-pingWindow = []
-pingMax = 300 # in ms
-dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
-ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
-out = []
 
 def distance(origin, destination):
     """Determine distance between 2 sets of [lat,lon] in km"""
@@ -445,18 +446,17 @@ def speedtest():
     return output
 
 def do_speedtest_and_update_display():
-    # pwm.start(bluePin,50,60.0)
     print 'TESTING SPEED'
     values = speedtest()
-    pingtime = mapVals(float(values[0]),0,1000,0,180)
+    pingtime = mapVals(float(values[0]),0,pingMax,0,180)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.set_duty_cycle(redPin, dl+0.0)
     pwm.set_duty_cycle(greenPin, 100.0-dl)
-    # pwm.start(servoPin, 60.0)
     servo(servoPin, pingtime)
     print 'pingtime in servo degrees is', pingtime
     print 'dl is %s percent red', dl
+    print 'TEST COMPLETE, ', time.time()
     # updateDevice(pingtime, dl, ul)
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
