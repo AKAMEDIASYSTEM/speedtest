@@ -50,8 +50,9 @@ servoPin = 'P9_16' # also not in use for NYTLABS implementation
 # NOTE, these might be wrong! There's every possiblilty we want
 # max=95 and min=90 because the duty cycle is inverted??
 
-servoMax = 10.0
-servoMin = 5.0
+servo_duty_min = 3.0
+servo_duty_max = 14.5
+servo_duty_span = servo_duty_max - servo_duty_min
 
 # from sparkfun small-servo product comments (I think this is my type of servo)
 # Here is what I found out with this servo.
@@ -457,13 +458,13 @@ def do_speedtest_and_update_display():
     # pwm.start(bluePin,50,60.0)
     print 'TESTING SPEED'
     values = speedtest()
-    pingtime = mapVals(float(values[0]),0,1000,10,170) #changed to 160 deg total rot to be safe
+    pingtime = mapVals(float(values[0]),0,1000,0,180)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.set_duty_cycle(redPin, dl+0.0)
     pwm.set_duty_cycle(greenPin, 100.0-dl)
     # pwm.start(servoPin, 60.0)
-    # servo(servoPin, pingtime)
+    servo(servoPin, pingtime)
     print 'pingtime in servo degrees is', pingtime
     print 'dl is %s percent red', dl
     # updateDevice(pingtime, dl, ul)
@@ -486,16 +487,9 @@ def clamp(val, min, max):
     return val
 
 def servo(pinName,position):
-    # position should be 0-180, with 90 and center
-    # min -90deg, we are guessing this is a 1ms pulse
-    # 1ms pulse is 5% duty cycle
-    # max 90deg, we are guessing this is a 2ms pulse
-    # 2ms pulse is 10% duty cycle
-    # we are guessing it's a 50Hz (20ms) base freq
     duty = 100 - ((position / 180) * duty_span + duty_min)
-    # rot = mapVals(position,0,180,servoMin, servoMax)
     print 'duty should be', duty
-    pwm.set_duty_cycle(pinName, (100-duty_min))
+    pwm.set_duty_cycle(servoPin, duty)
 
 def updateDevice(pingtime, dls, uls):
     ping = mapVals(pingtime, 0, pingMax, 0, 255)
@@ -523,6 +517,7 @@ def exit_handler():
 pwm.start(greenPin, 10.0, 2000.0)
 # pwm.start(bluePin,0, 60.0)
 pwm.start(redPin, 10.0, 2000.0)
+pwm.start(servoPin, (100 - servo_duty_min), 60.0)
 # time.sleep(15)
 # print 'done starting pwm channels'
 atexit.register(exit_handler)
