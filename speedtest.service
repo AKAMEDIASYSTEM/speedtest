@@ -2,10 +2,11 @@
 Description=AKA Python Speedtest service
 
 [Service]
-Type=forking
-WorkingDirectory=/home/root/speedtest_project/speedtest/
+Type=oneshot
+WorkingDirectory=/home/root/speedtest/
 ExecStart=/usr/bin/python speedtest-cli-mod.py
 KillMode=process
 
 [Install]
 WantedBy=multi-user.target
+Wants=network-online.target
