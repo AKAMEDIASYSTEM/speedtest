@@ -453,7 +453,7 @@ def speedtest():
                resultid[0])
     return output
 
-def testSpeed():
+def do_speedtest_and_update_display():
     # pwm.start(bluePin,50,60.0)
     print 'TESTING SPEED'
     values = speedtest()
@@ -517,39 +517,21 @@ def exit_handler():
     pwm.stop(servoPin)
     pwm.cleanup()
 
-if __name__ == '__main__':
-    #PWM.start(channel, duty, freq=2000)
-    # print os.system('whoami')
-    # print 'starting pwm channels'
-    pwm.start(greenPin, 10.0, 2000.0)
-    # pwm.start(bluePin,0, 60.0)
-    pwm.start(redPin, 10.0, 2000.0)
-    # time.sleep(15)
-    # print 'done starting pwm channels'
-    atexit.register(exit_handler)
-    # time.sleep(120) # sleep for 2 minutes on boot to give network time to come up
-    while True:
-        try:
-            testSpeed()
-        except:
-            pass
-        time.sleep(interval)
-else:
-    #PWM.start(channel, duty, freq=2000)
-    # print os.system('whoami')
-    # print 'starting pwm channels'
-    pwm.start(greenPin, 10.0, 2000.0)
-    # pwm.start(bluePin,0, 60.0)
-    pwm.start(redPin, 10.0, 2000.0)
-    # time.sleep(15)
-    # print 'done starting pwm channels'
-    atexit.register(exit_handler)
-    # time.sleep(120) # sleep for 2 minutes on boot to give network time to come up
-    while True:
-        try:
-            testSpeed()
-        except:
-            pass
-        time.sleep(interval)
+#PWM.start(channel, duty, freq=2000)
+# print os.system('whoami')
+# print 'starting pwm channels'
+pwm.start(greenPin, 10.0, 2000.0)
+# pwm.start(bluePin,0, 60.0)
+pwm.start(redPin, 10.0, 2000.0)
+# time.sleep(15)
+# print 'done starting pwm channels'
+atexit.register(exit_handler)
+# time.sleep(120) # sleep for 2 minutes on boot to give network time to come up
+while True:
+    try:
+        do_speedtest_and_update_display()
+    except:
+        pass
+    time.sleep(interval)
 
 # vim:ts=4:sw=4:expandtab
