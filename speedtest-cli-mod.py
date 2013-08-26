@@ -366,7 +366,7 @@ def speedtest():
     else:
         print 'Ping: %(latency)s ms' % best
         output.append(best['latency'])
-        print 'best is ', best
+        print 'best result is ', best
 
     sizes = [350, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
     urls = []
@@ -436,9 +436,9 @@ def speedtest():
     return output
 
 def do_speedtest_and_update_display():
-    print 'TESTING SPEED, ', time.time()
+    print 'Speedtest beginning:', time.time()
     values = speedtest()
-    pingtime = mapVals(float(values[0]),0,pingMax,0,180)
+    pingtime = mapVals(float(values[0]), 0, pingMax, 0, 180)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.set_duty_cycle(redPin, dl+0.0)
@@ -446,7 +446,7 @@ def do_speedtest_and_update_display():
     servo(servoPin, pingtime)
     print('pingtime is %s, which is %s in servo degrees' % (float(values[0]), float(pingtime)))
     print 'download speed maps to %s percent red', dl
-    print 'TEST COMPLETE, ', time.time()
+    print 'Test complete:', time.time()
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
 
