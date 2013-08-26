@@ -444,7 +444,7 @@ def do_speedtest_and_update_display():
     pwm.set_duty_cycle(redPin, dl+0.0)
     pwm.set_duty_cycle(greenPin, 100.0-dl)
     servo(servoPin, pingtime)
-    print('pingtime is %f, which is %f in servo degrees', % (float(values[0]), float(pingtime)))
+    print('pingtime is %s, which is %s in servo degrees', % (float(values[0]), float(pingtime)))
     print 'download speed maps to %s percent red', dl
     print 'TEST COMPLETE, ', time.time()
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
