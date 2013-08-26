@@ -41,11 +41,11 @@ try:
 except ImportError:
     from optparse import OptionParser as ArgParser
 
-interval = 60 # in seconds, it turns out!
+interval = 120 # in seconds, it turns out!
 greenPin = 'P8_13'
-bluePin = 'P9_14' # we're not using blue LED, might not even plug it in
+bluePin = 'P9_14'
 redPin = 'P8_19'
-servoPin = 'P9_16' # also not in use for NYTLABS implementation
+servoPin = 'P9_16'
 
 servo_duty_min = 3.0
 servo_duty_max = 14.5
@@ -55,22 +55,12 @@ window_size = 29 # not using this yet
 dlWindow = []
 ulWindow = []
 pingWindow = []
+out = []
+
 
 pingMax = 1000 # in ms
 dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
 ulMax = 10 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
-out = []
-
-# from sparkfun small-servo product comments (I think this is my type of servo)
-# Here is what I found out with this servo.
-# Wiring:
-# Red: 5V
-# Brown: ground
-# Yellow: signal
-# Timing: Stable values
-# Right at 0.50mS (about 85 degrees)
-# Left at 2.0mS (about -85 degrees)
-# Center at 1.25ms (about 0 degrees)
 
 def distance(origin, destination):
     """Determine distance between 2 sets of [lat,lon] in km"""
@@ -457,7 +447,6 @@ def do_speedtest_and_update_display():
     print 'pingtime in servo degrees is', pingtime
     print 'dl is %s percent red', dl
     print 'TEST COMPLETE, ', time.time()
-    # updateDevice(pingtime, dl, ul)
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
 
@@ -488,14 +477,11 @@ def exit_handler():
     pwm.stop(bluePin)
     pwm.stop(servoPin)
     pwm.cleanup()
-
 #PWM.start(channel, duty, freq=2000)
 pwm.start(greenPin, 10.0, 2000.0)
-# pwm.start(bluePin,10, 60.0)
 pwm.start(redPin, 10.0, 2000.0)
 pwm.start(servoPin, (100 - servo_duty_min), 60.0)
 time.sleep(15)
-# print 'done starting pwm channels'
 atexit.register(exit_handler)
 while True:
     try:
