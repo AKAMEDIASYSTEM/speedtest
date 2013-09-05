@@ -8,5 +8,4 @@ ExecStart=/usr/bin/python speedtest-cli-mod.py
 KillMode=process
 
 [Install]
-WantedBy=multi-user.target
 Wants=network-online.target
