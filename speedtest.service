@@ -2,10 +2,7 @@
 Description=AKA Python Speedtest service
 
 [Service]
-Type=oneshot
+Type=simple
 WorkingDirectory=/home/root/speedtest/
-ExecStart=/usr/bin/python speedtest-cli-mod.py
+ExecStart=/usr/bin/python speedtest-cli-mod.py &
 KillMode=process
-
-[Install]
-Wants=network-online.target
