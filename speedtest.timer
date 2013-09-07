@@ -1,0 +1,10 @@
+[Unit]
+Description=AKA SPEEDTEST timer
+
+[Timer]
+OnActiveSec=200
+OnUnitInactiveSec=10
+Unit=speedtest.service
+
+[Install]
+WantedBy=multi-user.target
