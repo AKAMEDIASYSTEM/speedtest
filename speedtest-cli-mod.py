@@ -451,7 +451,7 @@ def do_speedtest_and_update_display():
     # open("recent_test.txt","w").write('\n'.join(out))
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-    toRet = outMin + (outMax - outMin) * ((val - inMin) / (inMax - inMin))
+    toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
     # if (toRet > outMax):
     #     toRet = outMax
     # if (toRet < outMin):
