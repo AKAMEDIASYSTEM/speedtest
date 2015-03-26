@@ -3,11 +3,11 @@ Description=AKA Python Speedtest service
 
 [Service]
 Type=simple
-WorkingDirectory=/home/root/speedtest/
-ExecStart=/usr/bin/python speedtest-cli-mod.py &
+WorkingDirectory=/root/speedtest/
+ExecStart=/usr/bin/python speedtest-poller.py
 KillMode=process
 Restart=always
-RestartSec=5
+RestartSec=60
 
 [Install]
 WantedBy=multi-user.target
