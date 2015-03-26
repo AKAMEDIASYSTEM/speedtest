@@ -7,6 +7,7 @@ import json
 import logging
 
 settings = {'debug':True}
+db = redis.StrictRedis(host='localhost', port=6379, db=0)
 
 class MainHandler(tornado.web.RequestHandler):
     # data = []
@@ -30,7 +31,7 @@ class MainHandler(tornado.web.RequestHandler):
 
 application = tornado.web.Application([
     (r"/", MainHandler),
-], **settings)
+], db=db, **settings)
 
 if __name__ == "__main__":
     tornado.options.parse_command_line()
