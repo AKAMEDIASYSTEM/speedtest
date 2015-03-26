@@ -24,8 +24,7 @@ import sys
 import threading
 import subprocess
 import re
-import Adafruit_BBIO.GPIO as GPIO
-import Adafruit_BBIO.PWM as pwm
+import redis
 from Queue import Queue
 from xml.dom import minidom as DOM
 try:
@@ -41,22 +40,13 @@ try:
 except ImportError:
     from optparse import OptionParser as ArgParser
 
-interval = 120 # in seconds, it turns out!
-greenPin = 'P8_13'
-bluePin = 'P9_14'
-redPin = 'P8_19'
-servoPin = 'P9_16'
 
-servo_duty_min = 3.0
-servo_duty_max = 14.5
-servo_duty_span = servo_duty_max - servo_duty_min
-
+EXPIRE_IN = 10800 # this is 3 hours in seconds
 window_size = 29 # not using this yet
 dlWindow = []
 ulWindow = []
 pingWindow = []
 out = []
-
 
 pingMax = 1000 # in ms
 dlMax = 20 # in Mb/s, we could divide by 8 to get megabytes/s, which is more common
@@ -78,7 +68,6 @@ def distance(origin, destination):
     d = radius * c
 
     return d
-
 
 class FileGetter(threading.Thread):
     def __init__(self, url, start):
@@ -106,7 +95,6 @@ class FileGetter(threading.Thread):
                 self.result = 0
         except IOError:
             self.result = 0
-
 
 def downloadSpeed(files, quiet=False):
     start = time.time()
@@ -139,7 +127,6 @@ def downloadSpeed(files, quiet=False):
     cons_thread.join()
     return (sum(finished)/(time.time()-start))
 
-
 class FilePutter(threading.Thread):
     def __init__(self, url, start, size):
         self.url = url
@@ -164,7 +151,6 @@ class FilePutter(threading.Thread):
                 self.result = 0
         except IOError:
             self.result = 0
-
 
 def uploadSpeed(url, sizes, quiet=False):
     start = time.time()
@@ -197,11 +183,9 @@ def uploadSpeed(url, sizes, quiet=False):
     cons_thread.join()
     return (sum(finished)/(time.time()-start))
 
-
 def getAttributesByTagName(dom, tagName):
     elem = dom.getElementsByTagName(tagName)[0]
     return dict(elem.attributes.items())
-
 
 def getConfig():
     """Download the speedtest.net configuration and return only the data
@@ -222,7 +206,6 @@ def getConfig():
 
     del root
     return config
-
 
 def closestServers(client, all=False):
     """Determine the 5 closest speedtest.net servers based on geographic
@@ -260,7 +243,6 @@ def closestServers(client, all=False):
     del servers
     return closest
 
-
 def getBestServer(servers):
     """Perform a speedtest.net "ping" to determine which speedtest.net
     server has the lowest latency
@@ -288,7 +270,6 @@ def getBestServer(servers):
     best['latency'] = fastest
 
     return best
-
 
 def speedtest():
     """Run the full speedtest.net test"""
@@ -435,20 +416,40 @@ def speedtest():
                resultid[0])
     return output
 
-def do_speedtest_and_update_display():
+# def do_speedtest_and_update_display():
+#     print 'Speedtest beginning:', time.time()
+#     values = speedtest()
+#     pingtime = mapVals(float(values[0]), 0, pingMax, 0, 180)
+#     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
+#     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
+#     pwm.set_duty_cycle(redPin, dl+0.0)
+#     pwm.set_duty_cycle(greenPin, 100.0-dl)
+#     print('pingtime is %s, which is %s in servo degrees' % (float(values[0]), float(pingtime)))
+#     print 'download speed maps to %s percent red', dl
+#     print 'Test complete:', time.time()
+#     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
+#     # open("recent_test.txt","w").write('\n'.join(out))
+
+
+def do_speedtest_and_update_redis():
+    r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
+    pipe = r_url.pipeline(transaction=True)
+    redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     print 'Speedtest beginning:', time.time()
     values = speedtest()
+    print values
+    '''
     pingtime = mapVals(float(values[0]), 0, pingMax, 0, 180)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
     pwm.set_duty_cycle(redPin, dl+0.0)
     pwm.set_duty_cycle(greenPin, 100.0-dl)
-    servo(servoPin, pingtime)
     print('pingtime is %s, which is %s in servo degrees' % (float(values[0]), float(pingtime)))
     print 'download speed maps to %s percent red', dl
     print 'Test complete:', time.time()
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
     # open("recent_test.txt","w").write('\n'.join(out))
+    '''
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
@@ -465,29 +466,8 @@ def clamp(val, min, max):
         val = max
     return val
 
-def servo(pinName,position):
-    duty = 100 - ((position / 180) * duty_span + duty_min)
-    print 'duty should be', duty
-    pwm.set_duty_cycle(servoPin, duty)
-
-def exit_handler():
-    print 'exiting'
-    pwm.stop(greenPin)
-    pwm.stop(redPin)
-    pwm.stop(bluePin)
-    pwm.stop(servoPin)
-    pwm.cleanup()
-#PWM.start(channel, duty, freq=2000)
-pwm.start(greenPin, 10.0, 2000.0)
-pwm.start(redPin, 10.0, 2000.0)
-pwm.start(servoPin, (100 - servo_duty_min), 60.0)
-time.sleep(15)
-atexit.register(exit_handler)
-while True:
-    try:
-        do_speedtest_and_update_display()
-    except:
-        pass
-    time.sleep(interval)
-
+try:
+    do_speedtest_and_update_redis()
+except:
+    pass
 # vim:ts=4:sw=4:expandtab
