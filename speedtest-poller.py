@@ -432,23 +432,24 @@ def speedtest():
 
 
 def do_speedtest_and_update_redis():
-    print 'trying in func'
+    print 'running speedtest'
     r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
     # pipe = r_speeds.pipeline(transaction=True)
     # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     print 'Speedtest beginning:', time.time()
     values = speedtest()
     d = []
+    f = ''
+    # order is pingtime, DL speed, UL speed
     for v in values:
         d.append("{0:.2f}".format(v))
+        f = f+':'+"{0:.2f}".format(v)
     print d
+    print f
     '''
     pingtime = mapVals(float(values[0]), 0, pingMax, 0, 180)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
     ul = mapVals(float(values[2]),0, ulMax, 0, 100)
-    pwm.set_duty_cycle(redPin, dl+0.0)
-    pwm.set_duty_cycle(greenPin, 100.0-dl)
-    print('pingtime is %s, which is %s in servo degrees' % (float(values[0]), float(pingtime)))
     print 'download speed maps to %s percent red', dl
     print 'Test complete:', time.time()
     # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
