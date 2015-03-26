@@ -438,7 +438,10 @@ def do_speedtest_and_update_redis():
     # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     print 'Speedtest beginning:', time.time()
     values = speedtest()
-    print values
+    d = []
+    for v in values:
+        d.append("{0:.2f}".format(v))
+    print d
     '''
     pingtime = mapVals(float(values[0]), 0, pingMax, 0, 180)
     dl = mapVals(float(values[1]),0, dlMax, 0, 100)
