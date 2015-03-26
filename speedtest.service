@@ -6,3 +6,8 @@ Type=simple
 WorkingDirectory=/home/root/speedtest/
 ExecStart=/usr/bin/python speedtest-cli-mod.py &
 KillMode=process
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
