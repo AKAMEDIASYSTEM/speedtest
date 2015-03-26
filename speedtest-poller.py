@@ -347,7 +347,7 @@ def speedtest():
     else:
         print 'Ping: %(latency)s ms' % best
         output.append(best['latency'])
-        # print 'best result is ', best
+        print 'best result is ', best
 
     sizes = [350, 500, 750, 1000, 1500, 2000, 2500, 3000, 3500, 4000]
     urls = []
@@ -360,7 +360,7 @@ def speedtest():
     dlspeed = downloadSpeed(urls, args.simple)
     if not args.simple:
         print
-    # print 'Download: %0.2f Mbit/s' % ((dlspeed / 1000 / 1000) * 8)
+    print 'Download: %0.2f Mbit/s' % ((dlspeed / 1000 / 1000) * 8)
     output.append(((dlspeed / 1000 / 1000) * 8))
 
     sizesizes = [int(.25 * 1000 * 1000), int(.5 * 1000 * 1000)]
@@ -373,7 +373,7 @@ def speedtest():
     ulspeed = uploadSpeed(best['url'], sizes, args.simple)
     if not args.simple:
         print
-    # print 'Upload: %0.2f Mbit/s' % ((ulspeed / 1000 / 1000) * 8)
+    print 'Upload: %0.2f Mbit/s' % ((ulspeed / 1000 / 1000) * 8)
     output.append(((ulspeed / 1000 / 1000) * 8))
 
     if args.share:
@@ -412,7 +412,7 @@ def speedtest():
             print 'Could not submit results to speedtest.net'
             sys.exit(1)
 
-        # print ('Share results: http://www.speedtest.net/result/%s.png' %
+        print ('Share results: http://www.speedtest.net/result/%s.png' %
                resultid[0])
     return output
 
