@@ -438,19 +438,13 @@ def do_speedtest_and_update_redis():
     # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     print 'Speedtest beginning:', time.time()
     values = speedtest()
-    d = []
     f = {'ping':"{0:.2f}".format(values[0]), 'DL':"{0:.2f}".format(values[1]), 'UL':"{0:.2f}".format(values[2])}
     # order is pingtime, DL speed, UL speed
     print f
-    '''
-    pingtime = mapVals(float(values[0]), 0, pingMax, 0, 180)
-    dl = mapVals(float(values[1]),0, dlMax, 0, 100)
-    ul = mapVals(float(values[2]),0, ulMax, 0, 100)
-    print 'download speed maps to %s percent red', dl
-    print 'Test complete:', time.time()
-    # out = [line] + [l for l in open("recent_test.txt")][0:window_size]
-    # open("recent_test.txt","w").write('\n'.join(out))
-    '''
+    pipe_speeds = r_speeds.pipeline(transaction=True)
+    r_response = pipe_speeds.lpush('times',f).expire(f, EXPIRE_IN).execute()
+    print r_response
+    
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
