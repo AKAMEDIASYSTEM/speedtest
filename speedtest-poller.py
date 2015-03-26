@@ -467,6 +467,7 @@ def clamp(val, min, max):
     return val
 
 try:
+    print 'trying'
     do_speedtest_and_update_redis()
 except:
     pass
