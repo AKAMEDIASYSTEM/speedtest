@@ -439,12 +439,8 @@ def do_speedtest_and_update_redis():
     print 'Speedtest beginning:', time.time()
     values = speedtest()
     d = []
-    f = ''
+    f = {'ping':"{0:.2f}".format(values[0]), 'DL':"{0:.2f}".format(values[1]), 'UL':"{0:.2f}".format(values[2])}
     # order is pingtime, DL speed, UL speed
-    for v in values:
-        d.append("{0:.2f}".format(v))
-        f = f+':'+"{0:.2f}".format(v)
-    print d
     print f
     '''
     pingtime = mapVals(float(values[0]), 0, pingMax, 0, 180)
