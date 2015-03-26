@@ -442,7 +442,7 @@ def do_speedtest_and_update_redis():
     # order is pingtime, DL speed, UL speed
     print f
     pipe_speeds = r_speeds.pipeline(transaction=True)
-    r_response = pipe_speeds.lpush('times',f).expire(f, EXPIRE_IN).execute()
+    r_response = pipe_speeds.lpush('times',f).ltrim('times', 0, 179).execute()
     print r_response
     
 
