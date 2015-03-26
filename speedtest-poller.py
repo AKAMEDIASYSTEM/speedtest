@@ -432,6 +432,7 @@ def speedtest():
 
 
 def do_speedtest_and_update_redis():
+    print 'trying in func'
     r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
     pipe = r_url.pipeline(transaction=True)
     redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
