@@ -11,7 +11,7 @@ from ResponseObject import ResponseObject
 from tornado.template import Template
 from tornado.template import Loader
 
-class BrowserHandler(BaseHandler):
+class WebHandler(BaseHandler):
     """HTML display of Keywords browsed in the last day"""
 
     def get(self):
