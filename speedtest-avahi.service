@@ -4,6 +4,6 @@
     <host-name>lilstatus.local</host-name>
     <type>_http._tcp</type>
     <port>80</port>
-    <txt-record>path=/api?n=10</txt-record>
+    <txt-record>path=/</txt-record>
   </service>
 </service-group>

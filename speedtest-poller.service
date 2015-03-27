@@ -4,7 +4,7 @@ Description=AKA Python Speedtest-poller service
 [Service]
 Type=simple
 WorkingDirectory=/root/speedtest/
-ExecStart=/usr/bin/python speedtest-poller.py
+ExecStart=/usr/bin/python poller.py
 KillMode=process
 Restart=always
 RestartSec=60

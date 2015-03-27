@@ -12,10 +12,10 @@ from tornado.template import Template
 from tornado.template import Loader
 
 class WebHandler(BaseHandler):
-    """HTML display of Keywords browsed in the last day"""
+    """HTML display of pingtimes over recent past"""
 
     def get(self):
-        loader = tornado.template.Loader('../server/templates')
+        loader = tornado.template.Loader('../templates')
         n = self.get_argument('n', 3)
         db = self.settings['db']
         logging.debug('hit the BrowserHandler endpoint with n=', n)
@@ -26,5 +26,5 @@ class WebHandler(BaseHandler):
             if k not in keywords:
                 keywords.append(k)
                 found += 1
-        self.write(loader.load("zen.html").generate(keywords=keywords))
+        self.write(loader.load("speedtest.html").generate(keywords=keywords))
         self.finish()
