@@ -8,27 +8,25 @@ from handlers.BaseHandler import BaseHandler
 from ResponseObject import ResponseObject
 
 class ApiHandler(BaseHandler):
-    """json access to local curriculum store"""
+    """json access to local speedtest store"""
 
     def get(self):
         try:
             n = self.get_argument('n')
+            n = int(n)
+            if n < 1:
+                n = 1
         except:
-            n = 3 # three hours, should be global EXPIRE_IN from worker.py
+            n = 10 # deliver the last ten results by default
         db = self.settings['db']
-        print 'hit the BrowserHandler endpoint with n=', n
-        keywords = []
-        found = 0
-        while found < int(n):
-            k = db.randomkey()
-            if k is not None:
-                if k not in keywords:
-                    keywords.append(k)
-                    found += 1
-            else:
-                keywords = ['no recent results']
-        d = {'title':'tuned-resonator curriculum-barnacle test',
-        'noun_phrase':keywords}
+        print 'hit the ApiHandler endpoint with n=', n
+        k = db.lrange('times',0,n)
+        if k is not None:
+            print k
+        else:
+            pass
+        d = {'title':'tuned-resonator speedtest-barnacle test',
+        'results':k}
         self.response = ResponseObject('200','Success', d)
         self.write_response()
         self.finish()
