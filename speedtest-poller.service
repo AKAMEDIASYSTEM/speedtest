@@ -1,5 +1,5 @@
 [Unit]
-Description=AKA Python Speedtest service
+Description=AKA Python Speedtest-poller service
 
 [Service]
 Type=simple
