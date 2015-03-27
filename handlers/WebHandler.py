@@ -21,10 +21,7 @@ class WebHandler(BaseHandler):
         logging.debug('hit the BrowserHandler endpoint with n=', n)
         keywords = []
         found = 0
-        while found < int(n):
-            k = db.randomkey()
-            if k not in keywords:
-                keywords.append(k)
-                found += 1
+        keywords = db.lrange('times',0,n)
+        print keywords
         self.write(loader.load("speedtest.html").generate(keywords=keywords))
         self.finish()

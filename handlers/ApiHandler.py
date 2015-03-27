@@ -12,7 +12,7 @@ class ApiHandler(BaseHandler):
 
     def get(self):
         try:
-            n = self.get_argument('n')
+            n = self.get_argument('n',10) # return 10 if n is None
             n = int(n)
             if n < 1:
                 n = 1
