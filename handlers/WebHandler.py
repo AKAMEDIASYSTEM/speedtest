@@ -15,7 +15,7 @@ class WebHandler(BaseHandler):
     """HTML display of pingtimes over recent past"""
 
     def get(self):
-        loader = tornado.template.Loader('../templates')
+        loader = tornado.template.Loader('../speedtest/templates')
         n = self.get_argument('n', 3)
         db = self.settings['db']
         logging.debug('hit the BrowserHandler endpoint with n=', n)
