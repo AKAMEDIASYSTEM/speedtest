@@ -1,0 +1,13 @@
+[Unit]
+Description=AKA Python Speedtest-server service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/speedtest/
+ExecStart=/usr/bin/python speedtest-server.py
+KillMode=process
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
