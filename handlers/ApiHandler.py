@@ -20,7 +20,7 @@ class ApiHandler(BaseHandler):
             n = 10 # deliver the last ten results by default
         db = self.settings['db']
         print 'hit the ApiHandler endpoint with n=', n
-        k = db.lrange('times',0,n)
+        k = db.lrange('times',0,n-1)
         if k is not None:
             print k
         else:
