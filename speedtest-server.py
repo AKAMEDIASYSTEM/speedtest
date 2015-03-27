@@ -5,7 +5,7 @@ import re
 import subprocess
 import json
 import logging
-from handlers.BrowserHandler import BrowserHandler
+from handlers.WebHandler import WebHandler
 from handlers.ApiHandler import ApiHandler
 
 settings = {'debug':True}
