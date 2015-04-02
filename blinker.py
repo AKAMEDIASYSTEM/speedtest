@@ -33,10 +33,10 @@ def do_blink():
     print recent
     for event in recent:
         print event
-        for ul, dl, ping in event:
-            print ul
-            print dl
-            print ping
+        # for ul, dl, ping in event:
+        #     print ul
+        #     print dl
+        #     print ping
 
     # f = {'ping':"{0:.2f}".format(values[0]), 'DL':"{0:.2f}".format(values[1]), 'UL':"{0:.2f}".format(values[2])}
     # order is pingtime, DL speed, UL speed
