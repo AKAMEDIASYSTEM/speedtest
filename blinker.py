@@ -32,6 +32,7 @@ def do_blink():
     recent = r_speeds.lrange('times',0,59)
     print recent
     for event in recent:
+        print event
         for ul, dl, ping in event:
             print ul
             print dl
