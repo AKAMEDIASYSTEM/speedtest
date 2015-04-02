@@ -13,28 +13,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import urllib2
-import math
-import time
-import os
-import sys
-import threading
+import blink1
 import redis
-from Queue import Queue
-from xml.dom import minidom as DOM
-try:
-    from urlparse import parse_qs
-except ImportError:
-    from cgi import parse_qs
-try:
-    from hashlib import md5
-except ImportError:
-    from md5 import md5
-try:
-    from argparse import ArgumentParser as ArgParser
-except ImportError:
-    from optparse import OptionParser as ArgParser
-
 
 EXPIRE_IN = 10800 # this is 3 hours in seconds
 window_size = 29 # not using this yet
