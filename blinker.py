@@ -49,22 +49,17 @@ def do_blink():
 
     # pipe = r_speeds.pipeline(transaction=True)
     # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
-    print 'Speedtest beginning:', time.time()
-    values = speedtest()
-    f = {'ping':"{0:.2f}".format(values[0]), 'DL':"{0:.2f}".format(values[1]), 'UL':"{0:.2f}".format(values[2])}
+    print r_speeds.lrange('times',0,59)
+    # f = {'ping':"{0:.2f}".format(values[0]), 'DL':"{0:.2f}".format(values[1]), 'UL':"{0:.2f}".format(values[2])}
     # order is pingtime, DL speed, UL speed
-    print f
-    pipe_speeds = r_speeds.pipeline(transaction=True)
-    r_response = pipe_speeds.lpush('times',f).ltrim('times', 0, 179).execute()
-    print r_response
+    # print f
+    # pipe_speeds = r_speeds.pipeline(transaction=True)
+    # r_response = pipe_speeds.lpush('times',f).ltrim('times', 0, 179).execute()
+    # print r_response
     
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
-    # if (toRet > outMax):
-    #     toRet = outMax
-    # if (toRet < outMin):
-    #     toRet = outMin
     return clamp(toRet, outMin, outMax)
 
 def clamp(val, min, max):
