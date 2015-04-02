@@ -30,6 +30,7 @@ def do_blink():
     # pipe = r_speeds.pipeline(transaction=True)
     # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     recent = r_speeds.lrange('times',0,59)
+    print recent[0]
     for i, j, k in recent[0]:
         print i
         print j
