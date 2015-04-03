@@ -64,7 +64,8 @@ def do_blink():
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
-    return clamp(toRet, outMin, outMax)
+    # return clamp(toRet, outMin, outMax)
+    return toRet
 
 def clamp(val, minv, maxv):
     if (val < minv):
