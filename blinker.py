@@ -63,11 +63,11 @@ def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
     return clamp(toRet, outMin, outMax)
 
-def clamp(val, min, max):
-    if (val < min):
-        val = min
-    if (val > max):
-        val = max
+def clamp(val, minv, maxv):
+    if (val < minv):
+        val = minv
+    if (val > maxv):
+        val = maxv
     return val
 
 def mean(inp):
