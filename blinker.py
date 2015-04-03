@@ -48,6 +48,7 @@ def do_blink():
     print current
     print current['DL']
     print ulAv
+    print min(ulAv)
     ulOutput = mapVals(current['UL'], min(ulAv),max(ulAv),0,255)
     print ulOutput
     dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
