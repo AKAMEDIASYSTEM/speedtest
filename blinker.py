@@ -45,12 +45,12 @@ def do_blink():
         #     print dl
         #     print ping
     current = ast.literal_eval(recent[0])
-    print current
-    print current['DL']
-    print ulAv
-    print 'min is ', min(ulAv)
-    print 'max is ', max(ulAv)
-    print 'mean is ', mean(ulAv)
+    # print current
+    # print current['DL']
+    # print ulAv
+    # print 'min is ', min(ulAv)
+    # print 'max is ', max(ulAv)
+    # print 'mean is ', mean(ulAv)
     ulOutput = mapVals(current['UL'], min(ulAv), max(ulAv),0,255)
     print ulOutput
     dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
@@ -64,7 +64,7 @@ def do_blink():
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     print 'in mapval', val, inMin, inMax, outMin, outMax
-    toRet = outMin + float(float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
+    toRet = outMin + float(float(outMax - outMin)*float(val - inMin)/float(inMax - inMin))
     print 'returning',toRet
     return toRet
 
