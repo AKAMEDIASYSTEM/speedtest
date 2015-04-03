@@ -1,0 +1,13 @@
+[Unit]
+Description=AKA Python Speedtest-blinker service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/speedtest/
+ExecStart=/usr/bin/python blinker.py
+KillMode=process
+Restart=always
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
