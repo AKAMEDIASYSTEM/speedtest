@@ -16,7 +16,6 @@
 from blink1 import Blink1
 import redis
 import ast
-from __future__ import division
 
 EXPIRE_IN = 10800 # this is 3 hours in seconds
 window_size = 29 # not using this yet
