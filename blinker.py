@@ -53,8 +53,8 @@ def do_blink():
     # print 'mean is ', mean(ulAv)
     ulOutput = mapVals(float(current['UL']), min(ulAv), max(ulAv),0.0,255.0)
     print ulOutput
-    dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
-    pingOutput = 10.0*mapVals(current['ping'], min(pingAv),max(pingAv),0,255) # times 10 just for pingtime to be noticeable
+    dlOutput = mapVals(float(current['DL']), min(dlAv),max(dlAv),0,255)
+    pingOutput = 10.0*mapVals(float(current['ping']), min(pingAv),max(pingAv),0,255) # times 10 just for pingtime to be noticeable
     # ulAvg = mean(ulAv)
     # dlAvg = mean(dlAv)
     # pingAvg = mean(pingAv)
@@ -63,11 +63,9 @@ def do_blink():
     b1.fade_to_rgb(int(pingOutput),(255-dlOutput),(dlOutput), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-    print 'in mapval', type(val), type(inMin), type(inMax), type(outMin), type(outMax)
-    print 'in mapval', val, inMin, inMax, outMin, outMax
-    d = inMax-inMin
-    r = val-inMin
-    toRet = outMin+ (outMax-outMin)*((r)/float(d))
+    # print 'in mapval', type(val), type(inMin), type(inMax), type(outMin), type(outMax)
+    # print 'in mapval', val, inMin, inMax, outMin, outMax
+    toRet = outMin+ (outMax-outMin)*((val-inMin)/float(inMax-inMin))
     print 'returning',toRet
     return toRet
 
