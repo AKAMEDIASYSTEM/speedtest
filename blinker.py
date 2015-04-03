@@ -63,6 +63,7 @@ def do_blink():
     b1.fade_to_rgb(int(pingOutput),(255-dlOutput),(dlOutput), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
+    print 'in mapval'
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
     # return clamp(toRet, outMin, outMax)
     print 'returning',toRet
