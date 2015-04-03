@@ -33,11 +33,23 @@ def do_blink():
     # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     recent = r_speeds.lrange('times',0,59)
     # print recent
+    pingAv = 0
+    ulAv = 0
+    dlAv = 0
     for event in recent:
-        print recent[event]
+        for entry in event:
+            if entry=='UL':
+                ulAv+=event[entry]
+            if entry=='DL':
+                dlAv+=event[entry]
+            if entry=='ping':
+                pingAv+=event[entry]
         #     print ul
         #     print dl
         #     print ping
+    ulAv = ulAv/float(len(recent))
+    dlAv = dlAv/float(len(recent))
+    pingAv = pingAv/float(len(recent))
 
     b1 = Blink1()
     print 'value is %s' % value
