@@ -45,6 +45,7 @@ def do_blink():
         #     print dl
         #     print ping
     current = ast.literal_eval(recent[0])
+    print current
     ulOutput = mapVals(current['UL'], min(ulAv),max(ulAv),0,255)
     dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
     pingOutput = 10.0*mapVals(current['ping'], min(pingAv),max(pingAv),0,255) # times 10 just for pingtime to be noticeable
