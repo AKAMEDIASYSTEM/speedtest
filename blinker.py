@@ -14,7 +14,6 @@
 #    under the License.
 
 from blink1 import Blink1
-import time
 import redis
 import ast
 
@@ -28,21 +27,15 @@ def do_blink():
     # find max and min
     # scale most recent result to max and min
     # tell blink(1) to be that color
-
-    # pipe = r_speeds.pipeline(transaction=True)
-    # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     recent = r_speeds.lrange('times',0,59)
-    print recent
-    print len(recent)
     pingAv = 0
     ulAv = 0
     dlAv = 0
     for event in recent:
+        # redis stores dict as a string, this is working ok to re-dict
         event = ast.literal_eval(event)
         for entry in event:
-            print entry
             if entry=='UL':
-                print 'found a UL'
                 ulAv+=float(event[entry])
             if entry=='DL':
                 dlAv+=float(event[entry])
@@ -56,7 +49,6 @@ def do_blink():
     pingAv = pingAv/float(len(recent))
     print ulAv, dlAv, pingAv
     b1 = Blink1()
-    print 'dlAv is %s' % dlAv
     b1.fade_to_rgb(int(pingAv),(255-dlAv),(dlAv), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
