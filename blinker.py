@@ -48,6 +48,7 @@ def do_blink():
     print current
     print current['DL']
     ulOutput = mapVals(current['UL'], min(ulAv),max(ulAv),0,255)
+    print ulOutput
     dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
     pingOutput = 10.0*mapVals(current['ping'], min(pingAv),max(pingAv),0,255) # times 10 just for pingtime to be noticeable
     # ulAvg = mean(ulAv)
