@@ -22,7 +22,6 @@ window_size = 29 # not using this yet
 
 def do_blink():
     print 'running blinker'
-
     r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
     # get last 60 results (ie LRANGE times 0 59)
     # find max and min
@@ -50,6 +49,7 @@ def do_blink():
     ulAv = ulAv/float(len(recent))
     dlAv = dlAv/float(len(recent))
     pingAv = pingAv/float(len(recent))
+    print ulAv, dlAv, pingAv
 
     b1 = Blink1()
     print 'value is %s' % value
