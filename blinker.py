@@ -40,11 +40,11 @@ def do_blink():
         for entry in event:
             if entry=='UL':
                 print 'found a UL'
-                ulAv+=event[entry]
+                ulAv+=float(event[entry])
             if entry=='DL':
-                dlAv+=event[entry]
+                dlAv+=float(event[entry])
             if entry=='ping':
-                pingAv+=event[entry]
+                pingAv+=float(event[entry])
         #     print ul
         #     print dl
         #     print ping
