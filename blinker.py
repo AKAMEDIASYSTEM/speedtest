@@ -32,6 +32,7 @@ def do_blink():
     # redis_response = pipe.incr(url).expire(url, EXPIRE_IN).execute()
     recent = r_speeds.lrange('times',0,59)
     print recent
+    print len(recent)
     pingAv = 0
     ulAv = 0
     dlAv = 0
