@@ -60,7 +60,7 @@ def do_blink():
     # pingAvg = mean(pingAv)
     print ulOutput, dlOutput, pingOutput
     b1 = Blink1()
-    b1.fade_to_rgb(int(pingOutput),(255-dlOutput),(dlOutput), 0)
+    b1.fade_to_rgb(int(pingOutput),int(255-dlOutput),int(dlOutput), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     # print 'in mapval', type(val), type(inMin), type(inMax), type(outMin), type(outMax)
