@@ -64,7 +64,7 @@ def do_blink():
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     print 'in mapval', val, inMin, inMax, outMin, outMax
-    toRet = outMin + float(float(outMax - outMin)*float(val - inMin)/float(inMax - inMin))
+    toRet = outlo+ (outMax-outMin)*((val-inMin)/float(inMax-inMin))
     print 'returning',toRet
     return toRet
 
