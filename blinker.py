@@ -57,7 +57,7 @@ def do_blink():
     print ulAv, dlAv, pingAv
     b1 = Blink1()
     print 'dlAv is %s' % dlAv
-    b1.fade_to_rgb(5000,(255-dlAv),(dlAv), 0)
+    b1.fade_to_rgb(int(pingAv),(255-dlAv),(dlAv), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
