@@ -16,6 +16,7 @@
 from blink1 import Blink1
 import redis
 import ast
+from __future__ import division
 
 EXPIRE_IN = 10800 # this is 3 hours in seconds
 window_size = 29 # not using this yet
@@ -64,7 +65,7 @@ def do_blink():
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     print 'in mapval', val, inMin, inMax, outMin, outMax
-    toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
+    toRet = outMin + (float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
     # return clamp(toRet, outMin, outMax)
     print 'returning',toRet
     return toRet
