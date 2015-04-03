@@ -50,6 +50,7 @@ def do_blink():
     print ulAv
     print 'min is ', min(ulAv)
     print 'max is ', max(ulAv)
+    print 'mean is ', mean(ulAv)
     ulOutput = mapVals(current['UL'], min(ulAv),max(ulAv),0,255)
     print ulOutput
     dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
