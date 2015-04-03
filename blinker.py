@@ -39,6 +39,7 @@ def do_blink():
     for event in recent:
         for entry in event:
             if entry=='UL':
+                print 'found a UL'
                 ulAv+=event[entry]
             if entry=='DL':
                 dlAv+=event[entry]
