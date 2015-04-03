@@ -48,10 +48,10 @@ def do_blink():
     ulOutput = mapVals(current['UL'], min(ulAv),max(ulAv),0,255)
     dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
     pingOutput = 10.0*mapVals(current['ping'], min(pingAv),max(pingAv),0,255) # times 10 just for pingtime to be noticeable
-    ulAvg = mean(ulAv)
-    dlAvg = mean(dlAv)
-    pingAvg = mean(pingAv)
-    print ulAvg, dlAvg, pingAvg
+    # ulAvg = mean(ulAv)
+    # dlAvg = mean(dlAv)
+    # pingAvg = mean(pingAv)
+    print ulOutput, dlOutput, pingOutput
     b1 = Blink1()
     b1.fade_to_rgb(int(pingOutput),(255-dlOutput),(dlOutput), 0)
 
