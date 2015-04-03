@@ -16,6 +16,7 @@
 from blink1 import Blink1
 import time
 import redis
+import ast
 
 EXPIRE_IN = 10800 # this is 3 hours in seconds
 window_size = 29 # not using this yet
@@ -37,6 +38,7 @@ def do_blink():
     ulAv = 0
     dlAv = 0
     for event in recent:
+        event = ast.literal_eval(event)
         for entry in event:
             print entry
             if entry=='UL':
