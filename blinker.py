@@ -13,7 +13,8 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import blink1
+from blink1 import Blink1
+import time
 import redis
 
 EXPIRE_IN = 10800 # this is 3 hours in seconds
@@ -21,6 +22,7 @@ window_size = 29 # not using this yet
 
 def do_blink():
     print 'running blinker'
+
     r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
     # get last 60 results (ie LRANGE times 0 59)
     # find max and min
@@ -38,13 +40,9 @@ def do_blink():
         #     print dl
         #     print ping
 
-    # f = {'ping':"{0:.2f}".format(values[0]), 'DL':"{0:.2f}".format(values[1]), 'UL':"{0:.2f}".format(values[2])}
-    # order is pingtime, DL speed, UL speed
-    # print f
-    # pipe_speeds = r_speeds.pipeline(transaction=True)
-    # r_response = pipe_speeds.lpush('times',f).ltrim('times', 0, 179).execute()
-    # print r_response
-    
+    b1 = Blink1()
+    print 'value is %s' % value
+    b1.fade_to_rgb(5000,(255-value),(value), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
