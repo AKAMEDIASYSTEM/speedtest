@@ -17,9 +17,6 @@ from blink1 import Blink1
 import redis
 import ast
 
-EXPIRE_IN = 10800 # this is 3 hours in seconds
-window_size = 29 # not using this yet
-
 def do_blink():
     print 'running blinker'
     r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
