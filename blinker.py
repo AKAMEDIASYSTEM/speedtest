@@ -45,7 +45,7 @@ def do_blink():
         #     print dl
         #     print ping
     current = ast.literal_eval(recent[0])
-    # print current
+    print current
     # print current['DL']
     # print ulAv
     # print 'min is ', min(ulAv)
@@ -63,7 +63,7 @@ def do_blink():
     b1.fade_to_rgb(int(pingOutput),(255-dlOutput),(dlOutput), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-    print 'in mapval', val, inMin, inMax, outMin, outMax
+    print 'in mapval', type(val), type(inMin), type(inMax), type(outMin), type(outMax)
     d = inMax-inMin
     r = val-inMin
     toRet = outMin+ (outMax-outMin)*((d)/float(d))
