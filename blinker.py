@@ -28,28 +28,32 @@ def do_blink():
     # scale most recent result to max and min
     # tell blink(1) to be that color
     recent = r_speeds.lrange('times',0,59)
-    pingAv = 0
-    ulAv = 0
-    dlAv = 0
+    pingAv = []
+    ulAv = []
+    dlAv = []
     for event in recent:
         # redis stores dict as a string, this is working ok to re-dict
         event = ast.literal_eval(event)
         for entry in event:
             if entry=='UL':
-                ulAv+=float(event[entry])
+                ulAv.append(float(event[entry]))
             if entry=='DL':
-                dlAv+=float(event[entry])
+                dlAv.append(float(event[entry]))
             if entry=='ping':
-                pingAv+=float(event[entry])
+                pingAv.append(float(event[entry]))
         #     print ul
         #     print dl
         #     print ping
-    ulAv = ulAv/float(len(recent))
-    dlAv = dlAv/float(len(recent))
-    pingAv = pingAv/float(len(recent))
-    print ulAv, dlAv, pingAv
+    current = ast.literal_eval(recent[0])
+    ulOutput = mapVals(current['UL'], min(ulAv),max(ulAv),0,255)
+    dlOutput = mapVals(current['DL'], min(dlAv),max(dlAv),0,255)
+    pingOutput = 10.0*mapVals(current['ping'], min(pingAv),max(pingAv),0,255) # times 10 just for pingtime to be noticeable
+    ulAvg = mean(ulAv)
+    dlAvg = mean(dlAv)
+    pingAvg = mean(pingAv)
+    print ulAvg, dlAvg, pingAvg
     b1 = Blink1()
-    b1.fade_to_rgb(int(pingAv),(255-dlAv),(dlAv), 0)
+    b1.fade_to_rgb(int(pingOutput),(255-dlOutput),(dlOutput), 0)
 
 def mapVals(val, inMin, inMax, outMin, outMax):
     toRet = float(outMin + float(outMax - outMin) * float(float(val - inMin) / float(inMax - inMin)))
@@ -62,6 +66,12 @@ def clamp(val, min, max):
         val = max
     return val
 
+def mean(inp):
+    summ = 0;
+    for i in inp:
+        summ+=float(i)
+    summ = summ/float(len(inp))
+    return summ
 try:
     do_blink()
 except:
