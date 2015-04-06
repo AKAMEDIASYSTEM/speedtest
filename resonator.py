@@ -21,6 +21,8 @@ zeitgeist = r_speeds.lindex('times',0) # get latest entry
 print zeitgeist
 if zeitgeist is None:
     zeitgeist = 'redis is unavailable!'
+entry = ast.literal_eval(zeitgeist)
+print entry
 # here zeitgeist should be made XML-compliant via a truly opaque regex because:XML is nasty
 # create XML
 root = objectify.Element('service-group')
