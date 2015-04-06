@@ -19,11 +19,11 @@ hostname = hn.readline()[:-1]+'.local' # drop triailing newline
 hostname_text = 'http://'+hostname
 r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
 zeitgeist = r_speeds.lindex('times',0) # get latest entry
-print zeitgeist
 if zeitgeist is None:
     zeitgeist = 'redis is unavailable!'
 entry = ast.literal_eval(zeitgeist)
-print entry
+for i in entry:
+    print i
 # here zeitgeist should be made XML-compliant via a truly opaque regex because:XML is nasty
 # create XML
 root = objectify.Element('service-group')
