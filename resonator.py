@@ -12,6 +12,7 @@ from lxml import etree
 from lxml import objectify
 import redis
 import re
+import ast
 
 hn = open('/etc/hostname')
 hostname = hn.readline()[:-1]+'.local' # drop triailing newline
