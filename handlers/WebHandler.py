@@ -11,18 +11,18 @@ import ast
 class WebHandler(BaseHandler):
     """HTML display of pingtimes over recent past"""
 
-    def mapVals(val, inMin, inMax, outMin, outMax):
+    def mapVals(self, val, inMin, inMax, outMin, outMax):
         toRet = outMin + (outMax-outMin)*((val-inMin)/float(inMax-inMin))
         return toRet
 
-    def clamp(val, minv, maxv):
+    def clamp(self, val, minv, maxv):
         if (val < minv):
             val = minv
         if (val > maxv):
             val = maxv
         return val
 
-    def mean(inp):
+    def mean(self, inp):
         summ = 0
         for i in inp:
             summ += float(i)
