@@ -53,8 +53,7 @@ class WebHandler(BaseHandler):
         dlOutput = self.mapVals(float(current['DL']), min(dlAv), max(dlAv), 0, 255)
         pingOutput = 10.0*self.mapVals(float(current['ping']), min(pingAv), max(pingAv), 0, 255)  # times 10 just for pingtime to be noticeable
         print ulOutput, dlOutput, pingOutput
-        tcolor = [ulOutput,dlOutput]
         keywords = [current]
         print 'keywords is ', keywords
-        self.write(loader.load("speedtest.html").generate(keywords=keywords, color=tcolor))
+        self.write(loader.load("speedtest.html").generate(keywords=keywords, tred=(255-dlOutput), tgreen=dlOutput))
         self.finish()
