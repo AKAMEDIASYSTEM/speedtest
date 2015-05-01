@@ -49,9 +49,9 @@ class WebHandler(BaseHandler):
                     pingAv.append(float(event[entry]))
         current = ast.literal_eval(recent[0])
         print current
-        ulOutput = mapVals(float(current['UL']), min(ulAv), max(ulAv), 0.0, 255.0)
-        dlOutput = mapVals(float(current['DL']), min(dlAv), max(dlAv), 0, 255)
-        pingOutput = 10.0*mapVals(float(current['ping']), min(pingAv), max(pingAv), 0, 255)  # times 10 just for pingtime to be noticeable
+        ulOutput = self.mapVals(float(current['UL']), min(ulAv), max(ulAv), 0.0, 255.0)
+        dlOutput = self.mapVals(float(current['DL']), min(dlAv), max(dlAv), 0, 255)
+        pingOutput = 10.0*self.mapVals(float(current['ping']), min(pingAv), max(pingAv), 0, 255)  # times 10 just for pingtime to be noticeable
         print ulOutput, dlOutput, pingOutput
         keywords = []
         print keywords
