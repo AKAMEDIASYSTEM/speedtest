@@ -11,6 +11,24 @@ import ast
 class WebHandler(BaseHandler):
     """HTML display of pingtimes over recent past"""
 
+    def mapVals(val, inMin, inMax, outMin, outMax):
+        toRet = outMin + (outMax-outMin)*((val-inMin)/float(inMax-inMin))
+        return toRet
+
+    def clamp(val, minv, maxv):
+        if (val < minv):
+            val = minv
+        if (val > maxv):
+            val = maxv
+        return val
+
+    def mean(inp):
+        summ = 0
+        for i in inp:
+            summ += float(i)
+        summ = summ/float(len(inp))
+        return summ
+
     def get(self):
         loader = tornado.template.Loader('../speedtest/templates')
         db = self.settings['db']
@@ -31,9 +49,9 @@ class WebHandler(BaseHandler):
                     pingAv.append(float(event[entry]))
         current = ast.literal_eval(recent[0])
         print current
-        ulOutput = self.mapVals(float(current['UL']), min(ulAv), max(ulAv), 0.0, 255.0)
-        dlOutput = self.mapVals(float(current['DL']), min(dlAv), max(dlAv), 0, 255)
-        pingOutput = 10.0*self.mapVals(float(current['ping']), min(pingAv), max(pingAv), 0, 255)  # times 10 just for pingtime to be noticeable
+        ulOutput = mapVals(float(current['UL']), min(ulAv), max(ulAv), 0.0, 255.0)
+        dlOutput = mapVals(float(current['DL']), min(dlAv), max(dlAv), 0, 255)
+        pingOutput = 10.0*mapVals(float(current['ping']), min(pingAv), max(pingAv), 0, 255)  # times 10 just for pingtime to be noticeable
         print ulOutput, dlOutput, pingOutput
         keywords = []
         print keywords
