@@ -17,6 +17,7 @@ from blink1 import Blink1
 import redis
 import ast
 
+
 def do_blink():
     print 'running blinker'
     r_speeds = redis.StrictRedis(host='localhost', port=6379, db=0)
@@ -24,7 +25,7 @@ def do_blink():
     # find max and min
     # scale most recent result to max and min
     # tell blink(1) to be that color
-    recent = r_speeds.lrange('times',0,59)
+    recent = r_speeds.lrange('times', 0, 59)
     pingAv = []
     ulAv = []
     dlAv = []
@@ -32,24 +33,26 @@ def do_blink():
         # redis stores dict as a string, this is working ok to re-dict
         event = ast.literal_eval(event)
         for entry in event:
-            if entry=='UL':
+            if entry == 'UL':
                 ulAv.append(float(event[entry]))
-            if entry=='DL':
+            if entry == 'DL':
                 dlAv.append(float(event[entry]))
-            if entry=='ping':
+            if entry == 'ping':
                 pingAv.append(float(event[entry]))
     current = ast.literal_eval(recent[0])
     print current
-    ulOutput = mapVals(float(current['UL']), min(ulAv), max(ulAv),0.0,255.0)
-    dlOutput = mapVals(float(current['DL']), min(dlAv),max(dlAv),0,255)
-    pingOutput = 10.0*mapVals(float(current['ping']), min(pingAv),max(pingAv),0,255) # times 10 just for pingtime to be noticeable
+    ulOutput = mapVals(float(current['UL']), min(ulAv), max(ulAv), 0.0, 255.0)
+    dlOutput = mapVals(float(current['DL']), min(dlAv), max(dlAv), 0, 255)
+    pingOutput = 10.0*mapVals(float(current['ping']), min(pingAv), max(pingAv), 0, 255)  # times 10 just for pingtime to be noticeable
     print ulOutput, dlOutput, pingOutput
     b1 = Blink1()
-    b1.fade_to_rgb(int(pingOutput),int(255-dlOutput),int(dlOutput), 0)
+    b1.fade_to_rgb(int(pingOutput), int(255-dlOutput), int(dlOutput), 0)
+
 
 def mapVals(val, inMin, inMax, outMin, outMax):
-    toRet = outMin+ (outMax-outMin)*((val-inMin)/float(inMax-inMin))
+    toRet = outMin + (outMax-outMin)*((val-inMin)/float(inMax-inMin))
     return toRet
+
 
 def clamp(val, minv, maxv):
     if (val < minv):
@@ -58,10 +61,11 @@ def clamp(val, minv, maxv):
         val = maxv
     return val
 
+
 def mean(inp):
-    summ = 0;
+    summ = 0
     for i in inp:
-        summ+=float(i)
+        summ += float(i)
     summ = summ/float(len(inp))
     return summ
 try:
