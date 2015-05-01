@@ -55,5 +55,5 @@ class WebHandler(BaseHandler):
         print ulOutput, dlOutput, pingOutput
         keywords = [current]
         print 'keywords is ', keywords
-        self.write(loader.load("speedtest.html").generate(keywords=keywords, tred=(255-dlOutput), tgreen=dlOutput))
+        self.write(loader.load("speedtest.html").generate(keywords=keywords, tred=int(255-dlOutput), tgreen=int(dlOutput)))
         self.finish()
