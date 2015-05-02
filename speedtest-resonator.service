@@ -1,0 +1,13 @@
+[Unit]
+Description=AKA Python Speedtest-resonator (mDNS updater) service
+
+[Service]
+Type=simple
+WorkingDirectory=/root/speedtest/
+ExecStart=/usr/bin/python resonator.py
+Restart=always
+RestartSec=60
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target
