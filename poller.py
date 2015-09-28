@@ -325,6 +325,9 @@ def speedtest():
 
     if not args.simple:
         print 'Testing from %(isp)s (%(ip)s)...' % config['client']
+    
+    # aka debug
+    print args.server
 
     if args.server:
         try:
