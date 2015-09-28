@@ -282,6 +282,7 @@ def speedtest():
     try:
         parser.add_argument = parser.add_option
     except AttributeError:
+        print 'attribute error'
         pass
     parser.add_argument('--share', action='store_true',
                         help='Generate and provide a URL to the speedtest.net '
@@ -295,6 +296,9 @@ def speedtest():
     parser.add_argument('--server', help='Specify a server ID to test against')
     parser.set_defaults(simple=True) # added this to simplify importing this script
     options = parser.parse_args()
+
+    print options
+    
     if isinstance(options, tuple):
         args = options[0]
     else:
