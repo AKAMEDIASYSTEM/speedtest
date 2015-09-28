@@ -270,7 +270,7 @@ def getBestServer(servers):
 
 def speedtest():
     """Run the full speedtest.net test"""
-
+    print 'inside speedtest()'
     description = (
         'Command line interface for testing internet bandwidth using '
         'speedtest.net.\n'
