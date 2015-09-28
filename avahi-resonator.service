@@ -1,0 +1,9 @@
+<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd"><service-group>
+  <name replace-wildcards="yes">http://speedtest.local</name>
+  <service>
+    <host-name>speedtest.local</host-name>
+    <type>_http._tcp</type>
+    <port>80</port>
+    <txt-record>path='/'</txt-record>
+  </service>
+</service-group>
