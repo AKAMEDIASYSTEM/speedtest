@@ -44,6 +44,6 @@ tt_txtrecord._setText(d)
 objectify.deannotate(root, cleanup_namespaces=True)
 s = '<?xml version="1.0" standalone="no"?><!--*-nxml-*--><!DOCTYPE service-group SYSTEM "avahi-service.dtd">'+etree.tostring(root, pretty_print=True)
 # print s
-f = open('/etc/avahi/services/resonator-avahi.service', 'w')
+f = open('/etc/avahi/services/avahi-resonator.service', 'w')
 f.write(s)
 f.close()
